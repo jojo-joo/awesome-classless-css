@@ -1,5 +1,6 @@
 :root {
     --mc: #2196F3;
+    accent-color: var(--mc);
 }
 
 body {
@@ -45,6 +46,38 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 input[type="color"]:focus-visible {
+    outline: 2px solid var(--mc);
+    outline-offset: 2px;
+}
+
+input[type="range"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 6px;
+    border-radius: 3px;
+    background: #ccc;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-block-start: -5px;
+    border-radius: 50%;
+    background: var(--mc);
+}
+
+input[type="range"]:focus-visible {
     outline: 2px solid var(--mc);
     outline-offset: 2px;
 }
