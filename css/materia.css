@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --mc: #2196F3;
     accent-color: var(--mc);
 }
@@ -210,19 +210,79 @@ input[type="checkbox"][role="switch"]:focus-visible {
     top: 0;
     bottom: 0;
     width: 1px;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
     pointer-events: none;
 }
 
-.seg label:has(> input:checked)::after {
+.seg label:has(> input:checked):not(:has(+ label > input:checked))::after {
     display: none;
 }
 
-.seg label:has(+ label > input:checked)::after {
+.seg label:has(+ label > input:checked):not(:has(> input:checked))::after {
     display: none;
 }
 
 .seg input:checked + span {
+    background: var(--mc);
+    color: #fff;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: stretch;
+    gap: 0;
+    inline-size: 100%;
+    height: 30px;
+    margin: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #ccc;
+    vertical-align: middle;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: 0;
+    margin: 0;
+    padding: 0 4px;
+    font-size: 13px;
+    line-height: 1;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label > input {
+    display: none;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked):not(:has(+ label > input:checked))::after {
+    display: none;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(+ label > input:checked):not(:has(> input:checked))::after {
+    display: none;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked) {
     background: var(--mc);
     color: #fff;
 }
