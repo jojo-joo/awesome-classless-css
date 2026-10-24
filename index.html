@@ -342,14 +342,9 @@
         </svg>
       </button>
 
-      <div class="demo-switch" role="radiogroup" aria-label="CSS framework">
-        <label><input type="radio" name="fw" value="pico" checked>Pico</label>
-        <label><input type="radio" name="fw" value="sumi">Sumi</label>
-        <label><input type="radio" name="fw" value="missing">missing</label>
-        <label><input type="radio" name="fw" value="fylgja">Fylgja</label>
-        <label><input type="radio" name="fw" value="materia">Materia</label>
-        <label><input type="radio" name="fw" value="pure">Pure</label>
-      </div>
+      <!-- Pills are generated from the keys of the `frameworks` map in the
+           script at the bottom of this file. Do not hand-write them here. -->
+      <div class="demo-switch" role="radiogroup" aria-label="CSS framework"></div>
     </nav>
   </header>
 
@@ -623,6 +618,23 @@
       }
     }
 
+    // The nav pills are generated from Object.keys(frameworks): adding a
+    // framework means editing that one map and nothing else. The pill label is
+    // the key itself, verbatim.
+    function buildFrameworkPills() {
+      const pills = Object.keys(frameworks).map(name => {
+        const label = document.createElement('label');
+        const input = document.createElement('input');
+        input.type = 'radio';
+        input.name = 'fw';
+        input.value = name;
+        label.append(input, name);
+        return label;
+      });
+
+      switchEl.replaceChildren(...pills);
+    }
+
     switchEl.addEventListener('change', event => {
       const input = event.target;
       if (input.name !== 'fw') return;
@@ -679,7 +691,8 @@
     // Restore the framework from #hash so a reload keeps the current framework.
     const initial = location.hash.slice(1);
     const start = frameworks[initial] ? initial : 'pico';
-    document.querySelector('.demo-switch input[value="' + start + '"]').checked = true;
+    buildFrameworkPills();
+    switchEl.querySelector('input[value="' + start + '"]').checked = true;
     loadFramework(start);
     revealActivePill();
   </script>
