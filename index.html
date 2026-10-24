@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classless CSS — Form Controls Test</title>
+
+  <!--
+    Page chrome ONLY (top bar + a two-column grid). The form elements below are
+    deliberately left un-classed so each framework styles them itself.
+    No `!important` and no framework-agnostic resets, so what you see is the
+    framework's own rendering.
+  -->
+  <style id="demo-style">
+    /* The theme toggle pins `color-scheme` on :root. Without an explicit choice
+       the page follows the OS; with `data-theme` set it is locked. Everything
+       below that uses light-dark() — and the UA widgets (date pickers, range,
+       scrollbars) — follow from here. */
+    :root { color-scheme: light dark; }
+    :root[data-theme="light"] { color-scheme: light; }
+    :root[data-theme="dark"] { color-scheme: dark; }
+
+    .demo-bar {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 10;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem 1rem;
+      padding: .55rem clamp(1rem, 4vw, 2rem);
+      background: light-dark(#ffffff, #16181d);
+      color: light-dark(#191b21, #eceef2);
+      border-block-end: 1px solid light-dark(#0000001f, #ffffff24);
+      font: 0.875rem/1.4 system-ui, -apple-system, sans-serif;
+      /* Frameworks treat <header> as a page-header container (pico centres it at
+         700px, sumi insets it). This is sticky app chrome, so keep it full-bleed. */
+      inline-size: auto;
+      max-inline-size: none;
+      margin-inline: 0;
+    }
+    .demo-brand {
+      margin-inline-end: auto;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Theme toggle + framework switcher. The toggle is the first item so it
+       sits at the left edge of the nav group. */
+    .demo-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem;
+      margin: 0;
+      padding: 0;
+    }
+    /* Scoped to .demo-bar to outrank each framework's own <button> rules
+       (pico in particular makes buttons full-width and themed). */
+    .demo-bar .demo-theme {
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2rem;
+      block-size: 2rem;
+      margin: 0;
+      padding: 0;
+      border: 1px solid light-dark(#0000002e, #ffffff33);
+      border-radius: .45rem;
+      background: transparent;
+      box-shadow: none;
+      color: inherit;
+      font: inherit;
+      line-height: 0;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+    .demo-bar .demo-theme:hover {
+      background: light-dark(#0000000f, #ffffff1f);
+    }
+    .demo-bar .demo-theme:focus-visible {
+      outline: 2px solid light-dark(#1a6ee0, #7ab6ff);
+      outline-offset: 2px;
+    }
+    .demo-bar .demo-theme > svg {
+      display: block;
+      inline-size: 1.05rem;
+      block-size: 1.05rem;
+      pointer-events: none;
+    }
+    /* Show the icon of the mode you would switch *to*: moon in light, sun in dark. */
+    .demo-bar .demo-theme .i-sun { display: none; }
+    :root[data-theme="dark"] .demo-bar .demo-theme .i-sun { display: block; }
+    :root[data-theme="dark"] .demo-bar .demo-theme .i-moon { display: none; }
+
+    /* Framework switcher: radios visually collapsed into pill buttons so the
+       switcher looks identical under all four frameworks. */
+    .demo-switch {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+      margin: 0;
+      padding: 0;
+    }
+    .demo-switch label {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+      padding: .28rem .7rem;
+      border: 1px solid light-dark(#0000002e, #ffffff33);
+      border-radius: .45rem;
+      color: inherit;
+      font: inherit;
+      line-height: 1.4;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .demo-switch label:has(input:checked) {
+      background: light-dark(#191b21, #eceef2);
+      border-color: transparent;
+      color: light-dark(#ffffff, #16181d);
+    }
+    .demo-switch label:has(input:focus-visible) {
+      outline: 2px solid light-dark(#1a6ee0, #7ab6ff);
+      outline-offset: 2px;
+    }
+    .demo-switch input {
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      inline-size: 1px;
+      block-size: 1px;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Which stylesheets the current framework actually loaded. */
+    .demo-status {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .25rem;
+      font: 0.7rem/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    .demo-chip {
+      padding: .1rem .4rem;
+      border-radius: .3rem;
+      background: light-dark(#0000000d, #ffffff1a);
+      white-space: nowrap;
+    }
+    .demo-chip.is-fail {
+      background: light-dark(#c92a2a, #ff8787);
+      color: light-dark(#ffffff, #16181d);
+      font-weight: 600;
+    }
+
+    .demo-main {
+      max-inline-size: 62rem;
+      margin-inline: auto;
+      padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem) 5rem;
+    }
+
+    /* Two-column "label | control" grid, one row per control. */
+    .demo-field {
+      display: grid;
+      grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
+      align-items: center;
+      gap: .35rem 1rem;
+      margin-block: .8rem;
+      /* missing.css sizes inputs to 20ch by design; its own escape hatch makes
+         them fill the grid column instead. Ignored by the other frameworks. */
+      --input-inline-size-internal: 100%;
+    }
+    .demo-field > .demo-label {
+      justify-self: end;
+      text-align: end;
+      font-weight: 500;
+    }
+    .demo-form .demo-field > :is(input, select, textarea):not([type="color"]) {
+      inline-size: 100%;
+    }
+
+    .demo-choices {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .35rem 1.1rem;
+    }
+    .demo-form .demo-choices label {
+      display: inline-flex;
+      flex: 0 1 auto;          /* pico stretches these to fill the row */
+      align-items: center;
+      gap: .4rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .demo-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .75rem;
+      margin-block-start: 1.5rem;
+      /* Line the buttons up with the control column of the grid above. */
+      margin-inline-start: calc(12rem + 1rem);
+    }
+
+    .demo-result {
+      display: block;
+      margin-block-start: 1rem;
+      padding: .75rem 1rem;
+      border-radius: .5rem;
+      background: light-dark(#00000008, #ffffff12);
+      font: 0.75rem/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+    .demo-result:empty { display: none; }
+
+    .demo-form fieldset + fieldset { margin-block-start: 1.75rem; }
+
+    @media (max-width: 34rem) {
+      .demo-field { grid-template-columns: minmax(0, 1fr); }
+      .demo-field > .demo-label { justify-self: start; text-align: start; }
+      .demo-actions { margin-inline-start: 0; }
+    }
+  </style>
+
+  <script>
+    // Theme bootstrap — runs before first paint so the page never flashes the
+    // wrong mode. Order of precedence: explicit choice > OS preference.
+    (function () {
+      const STORAGE_KEY = 'classless-form-demo-theme';
+      const root = document.documentElement;
+      let saved = null;
+      try { saved = localStorage.getItem(STORAGE_KEY); } catch (error) { /* file:// */ }
+
+      // Pico and Sumi read [data-theme], missing.css reads the two classes,
+      // and `color-scheme` (set from [data-theme] in the stylesheet) drives
+      // missing.css's light-dark() palettes, the UA widgets and Fylgja.
+      window.setDemoTheme = function (mode, remember) {
+        root.dataset.theme = mode;
+        root.classList.toggle('-dark-theme', mode === 'dark');
+        root.classList.toggle('-no-dark-theme', mode === 'light');
+        if (remember) {
+          try { localStorage.setItem(STORAGE_KEY, mode); } catch (error) { /* file:// */ }
+        }
+        document.dispatchEvent(new CustomEvent('demo:themechange', { detail: mode }));
+      };
+
+      const darkQuery = matchMedia('(prefers-color-scheme: dark)');
+      setDemoTheme(saved || (darkQuery.matches ? 'dark' : 'light'), false);
+
+      // Keep following the OS until the visitor picks a theme themselves.
+      if (!saved) {
+        darkQuery.addEventListener('change', event => {
+          setDemoTheme(event.matches ? 'dark' : 'light', false);
+        });
+      }
+    })();
+  </script>
+</head>
+<body>
+  <header class="demo-bar">
+    <span class="demo-brand">Classless CSS · Form Test</span>
+
+    <nav class="demo-controls" aria-label="Demo controls">
+      <button type="button" class="demo-theme" id="theme-toggle" aria-label="Switch to dark theme" title="Switch to dark theme">
+        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="4.2"/>
+          <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6"/>
+        </svg>
+        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z"/>
+        </svg>
+      </button>
+
+      <div class="demo-switch" role="radiogroup" aria-label="CSS framework">
+        <label><input type="radio" name="fw" value="pico" checked>Pico</label>
+        <label><input type="radio" name="fw" value="sumi">Sumi</label>
+        <label><input type="radio" name="fw" value="missing">missing.css</label>
+        <label><input type="radio" name="fw" value="fylgja">Fylgja</label>
+      </div>
+    </nav>
+
+    <span class="demo-status" id="fw-status" aria-live="polite"></span>
+  </header>
+
+  <main class="demo-main">
+
+    <form id="settings" class="demo-form" autocomplete="on">
+
+      <!-- ============ Textual inputs ============ -->
+      <fieldset>
+        <legend>Text</legend>
+
+        <div class="demo-field">
+          <label class="demo-label" for="name">Name</label>
+          <input type="text" id="name" name="name" value="Ada Lovelace" placeholder="Ada Lovelace" autocomplete="name" required>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="email">Email</label>
+          <input type="email" id="email" name="email" value="ada@example.com" placeholder="ada@example.com" autocomplete="email" required>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="password">Password</label>
+          <input type="password" id="password" name="password" value="correct horse" minlength="8" autocomplete="new-password">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="phone">Phone</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 555 0100" pattern="[0-9+\-\s]{7,20}" autocomplete="tel">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="website">Website</label>
+          <input type="url" id="website" name="website" placeholder="https://example.com" autocomplete="url">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="age">Age</label>
+          <input type="number" id="age" name="age" value="36" min="1" max="120" step="1">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="search">Search</label>
+          <input type="search" id="search" name="search" placeholder="Search settings…">
+        </div>
+      </fieldset>
+
+      <!-- ============ Date & time ============ -->
+      <fieldset>
+        <legend>Date &amp; time</legend>
+
+        <div class="demo-field">
+          <label class="demo-label" for="birthday">Date</label>
+          <input type="date" id="birthday" name="birthday" value="1990-04-12">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="alarm">Time</label>
+          <input type="time" id="alarm" name="alarm" value="08:30">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="meeting">Date &amp; time</label>
+          <input type="datetime-local" id="meeting" name="meeting" value="2025-01-31T09:00">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="expiry">Month</label>
+          <input type="month" id="expiry" name="expiry" value="2027-06">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="sprint">Week</label>
+          <input type="week" id="sprint" name="sprint" value="2025-W05">
+        </div>
+      </fieldset>
+
+      <!-- ============ Selection ============ -->
+      <fieldset>
+        <legend>Selection</legend>
+
+        <div class="demo-field">
+          <label class="demo-label" for="country">Country</label>
+          <select id="country" name="country">
+            <option value="">Choose a country…</option>
+            <option value="de">Germany</option>
+            <option value="fr">France</option>
+            <option value="jp" selected>Japan</option>
+            <option value="nl">Netherlands</option>
+            <option value="us">United States</option>
+          </select>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="tz">Time zone</label>
+          <select id="tz" name="tz">
+            <optgroup label="Europe">
+              <option value="cet" selected>Berlin (CET)</option>
+              <option value="gmt">London (GMT)</option>
+            </optgroup>
+            <optgroup label="Asia">
+              <option value="jst">Tokyo (JST)</option>
+              <option value="cst">Shanghai (CST)</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="tags">Tags</label>
+          <select id="tags" name="tags" multiple size="5">
+            <option value="css" selected>CSS</option>
+            <option value="html" selected>HTML</option>
+            <option value="js">JavaScript</option>
+            <option value="a11y">Accessibility</option>
+            <option value="perf">Performance</option>
+          </select>
+        </div>
+
+        <div class="demo-field">
+          <span class="demo-label" id="gender-label">Gender</span>
+          <div class="demo-choices" role="group" aria-labelledby="gender-label">
+            <label><input type="radio" name="gender" value="f" checked> Female</label>
+            <label><input type="radio" name="gender" value="m"> Male</label>
+            <label><input type="radio" name="gender" value="x"> Non-binary</label>
+          </div>
+        </div>
+
+        <div class="demo-field">
+          <span class="demo-label" id="interests-label">Interests</span>
+          <div class="demo-choices" role="group" aria-labelledby="interests-label">
+            <label><input type="checkbox" name="interests" value="design" checked> Design</label>
+            <label><input type="checkbox" name="interests" value="code"> Code</label>
+            <label><input type="checkbox" name="interests" value="a11y"> Accessibility</label>
+          </div>
+        </div>
+
+        <div class="demo-field">
+          <span class="demo-label">Terms</span>
+          <div class="demo-choices">
+            <label><input type="checkbox" name="terms" value="yes" required checked> I accept the terms and conditions</label>
+          </div>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="notify">Notifications</label>
+          <div class="demo-choices">
+            <label><input type="checkbox" id="notify" name="notify" value="on" role="switch" checked> Email me about updates</label>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- ============ Files, colour, range, long text ============ -->
+      <fieldset>
+        <legend>Files, colours &amp; long text</legend>
+
+        <div class="demo-field">
+          <label class="demo-label" for="avatar">Avatar</label>
+          <input type="file" id="avatar" name="avatar" accept="image/*">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="docs">Attachments</label>
+          <input type="file" id="docs" name="docs" multiple>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="accent">Accent</label>
+          <input type="color" id="accent" name="accent" value="#1a6ee0">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="volume">Volume</label>
+          <input type="range" id="volume" name="volume" min="0" max="100" step="5" value="70">
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="editor">Editor</label>
+          <input type="text" id="editor" name="editor" list="editors" placeholder="Pick or type an editor…">
+          <datalist id="editors">
+            <option value="Neovim"></option>
+            <option value="VS Code"></option>
+            <option value="Zed"></option>
+            <option value="Emacs"></option>
+          </datalist>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="bio">Bio</label>
+          <textarea id="bio" name="bio" rows="4" placeholder="A few words about yourself…">CSS enthusiast.</textarea>
+        </div>
+      </fieldset>
+
+      <!-- ============ States & validation ============ -->
+      <fieldset>
+        <legend>States &amp; validation</legend>
+
+        <div class="demo-field">
+          <label class="demo-label" for="username">Username</label>
+          <input type="text" id="username" name="username" value="ada_l" placeholder="3–12 lowercase letters, digits or _" pattern="[a-z0-9_]{3,12}" required>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="readonly">Read only</label>
+          <input type="text" id="readonly" name="readonly" value="ada@example.com" readonly>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="disabled">Disabled</label>
+          <input type="text" id="disabled" name="disabled" value="Cannot be edited" disabled>
+        </div>
+
+        <div class="demo-field">
+          <span class="demo-label">Disabled group</span>
+          <fieldset disabled class="demo-choices">
+            <legend hidden>Disabled group</legend>
+            <label><input type="checkbox" name="legacy" value="1" checked> Legacy option</label>
+            <label><input type="radio" name="plan" value="free"> Free plan</label>
+          </fieldset>
+        </div>
+
+        <div class="demo-field">
+          <label class="demo-label" for="notes">Notes</label>
+          <textarea id="notes" name="notes" rows="2" disabled>This textarea is disabled.</textarea>
+        </div>
+      </fieldset>
+
+      <div class="demo-actions">
+        <button type="submit">Save changes</button>
+        <button type="reset">Reset</button>
+        <button type="button" disabled>Unavailable</button>
+      </div>
+
+      <output class="demo-result" id="result" for="name email phone" aria-live="polite"></output>
+    </form>
+  </main>
+
+  <script>
+    // Load order matters for Fylgja: tokens (props) -> base -> control tokens
+    // -> utilities (utilities must win).
+    const frameworks = {
+      pico: ['css/pico.css'],
+      sumi: ['css/sumi.css'],
+      missing: ['css/missing.css'],
+      fylgja: [
+        'css/fylgja-tokens.css',
+        'css/fylgja-base.css',
+        'css/fylgja-control.css',
+        'css/fylgja-utilities.css'
+      ]
+    };
+
+    // Framework sheets are inserted *before* this page's <style>, so that the
+    // page chrome (bar, grid, column widths) always wins a specificity tie.
+    // Otherwise e.g. missing.css's 20ch input width beats an equal-specificity
+    // rule here and the inputs collapse to 20 characters.
+    const pageStyle = document.getElementById('demo-style');
+    const statusEl = document.getElementById('fw-status');
+    const switchEl = document.querySelector('.demo-switch');
+    const form = document.getElementById('settings');
+    const result = document.getElementById('result');
+
+    let loadId = 0;
+
+    function renderStatus(items) {
+      statusEl.replaceChildren(...items.map(({ url, ok, timedOut }) => {
+        const chip = document.createElement('span');
+        const file = url.split('/').pop();
+        chip.className = 'demo-chip' + (ok ? '' : ' is-fail');
+        chip.textContent = file + (ok ? ' ✓' : timedOut ? ' ?' : ' ✗');
+        chip.title = url + (ok ? ' — loaded' : '. Did not load: the file is missing or blocked.');
+        return chip;
+      }));
+    }
+
+    function waitForSheet(url) {
+      return new Promise(resolve => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = url;
+        link.dataset.framework = '';
+        let settled = false;
+        const settle = (ok, timedOut) => {
+          if (settled) return;
+          settled = true;
+          resolve({ url, ok, timedOut });
+        };
+        link.addEventListener('load', () => settle(true, false), { once: true });
+        link.addEventListener('error', () => settle(false, false), { once: true });
+        // If the link is removed mid-flight neither event fires; don't hang.
+        setTimeout(() => settle(false, true), 5000);
+        document.head.insertBefore(link, pageStyle);
+      });
+    }
+
+    async function loadFramework(name) {
+      const id = ++loadId;
+      document.querySelectorAll('link[data-framework]').forEach(link => link.remove());
+
+      const urls = frameworks[name] || [];
+      const results = await Promise.all(urls.map(waitForSheet));
+
+      // A newer switch happened while these were loading: discard the result.
+      if (id !== loadId) return;
+      renderStatus(results);
+    }
+
+    switchEl.addEventListener('change', event => {
+      const input = event.target;
+      if (input.name !== 'fw') return;
+      try { history.replaceState(null, '', '#' + input.value); } catch {}
+      loadFramework(input.value);
+    });
+
+    // --- theme toggle ------------------------------------------------------
+    const themeToggle = document.getElementById('theme-toggle');
+
+    function syncThemeToggle() {
+      const label = document.documentElement.dataset.theme === 'dark'
+        ? 'Switch to light theme'
+        : 'Switch to dark theme';
+      themeToggle.setAttribute('aria-label', label);
+      themeToggle.title = label;
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+      setDemoTheme(next, true);
+    });
+
+    // Fires for clicks, and for OS changes while no explicit choice is stored.
+    document.addEventListener('demo:themechange', syncThemeToggle);
+    syncThemeToggle();
+
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      const rows = [];
+      for (const [key, value] of new FormData(form)) {
+        const shown = value instanceof File ? (value.name || '(no file)') : value;
+        rows.push(key.padEnd(12) + ' = ' + JSON.stringify(shown));
+      }
+      result.textContent = rows.join('\n');
+    });
+
+    form.addEventListener('reset', () => { result.textContent = ''; });
+
+    // Restore the framework from #hash so a reload keeps the current framework.
+    const initial = location.hash.slice(1);
+    const start = frameworks[initial] ? initial : 'pico';
+    document.querySelector('.demo-switch input[value="' + start + '"]').checked = true;
+    loadFramework(start);
+  </script>
+</body>
+</html>
