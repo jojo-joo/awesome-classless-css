@@ -1,0 +1,856 @@
+/*!
+ * pure.classless.css v1.0.0
+ * 一个基于 Pure.css 设计语言的 Classless CSS 框架
+ * 灵感来自 Pico.css 的 .classless 模式
+ * 无需任何 class，直接为语义化 HTML 元素提供样式
+ * License: MIT
+ */
+
+/* ==========================================================================
+   1. 设计令牌（CSS 变量）
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  /* 基础颜色（light-dark()：跟随 color-scheme，系统深色与 data-theme 都能驱动） */
+  --color-bg: light-dark(#ffffff, #111827);
+  --color-bg-subtle: light-dark(#f7f7f7, #1f2937);
+  --color-text: light-dark(#1f2937, #e5e7eb);
+  --color-text-muted: light-dark(#6b7280, #9ca3af);
+  --color-border: light-dark(#d1d5db, #374151);
+  --color-border-strong: light-dark(#9ca3af, #4b5563);
+  --color-link: light-dark(#0078e7, #60a5fa);
+  --color-link-hover: light-dark(#005bb5, #93c5fd);
+  --color-link-visited: light-dark(#7c3aed, #c4b5fd);
+  --color-mark-bg: light-dark(#fef3c7, #78350f);
+  --color-mark-text: light-dark(#78350f, #fef3c7);
+
+  /* Pure 风格按钮 */
+  --button-bg: light-dark(#f7f7f7, #1f2937);
+  --button-text: light-dark(#444444, #e5e7eb);
+  --button-border: light-dark(#cccccc, #374151);
+  --button-bg-hover: light-dark(#eaeaea, #273244);
+  --button-bg-active: light-dark(#e0e0e0, #303c50);
+  --button-bg-disabled: light-dark(#f7f7f7, #1f2937);
+  --button-text-disabled: light-dark(#b0b0b0, #4b5563);
+
+  /* 表单控件 */
+  --input-bg: light-dark(#ffffff, #1f2937);
+  --input-border: light-dark(#cccccc, #374151);
+  --input-shadow-color: light-dark(#eeeeee, rgba(0, 0, 0, 0.4));
+  --input-shadow: inset 0 1px 3px var(--input-shadow-color);
+  --input-placeholder: light-dark(#9ca3af, #6b7280);
+
+  /* 表格 */
+  --table-head-bg: light-dark(#e0e0e0, #1f2937);
+  --table-stripe-bg: light-dark(#f2f2f2, #172032);
+
+  /* 焦点环 */
+  --focus-ring-color: light-dark(rgba(0, 120, 231, 0.35), rgba(96, 165, 250, 0.4));
+  --focus-ring: 0 0 0 3px var(--focus-ring-color);
+
+  /* 字体 */
+  --font-sans: system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", "PingFang SC",
+    "Microsoft YaHei", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo,
+    Consolas, "Liberation Mono", monospace;
+
+  /* 排版 */
+  --font-size-base: 100%; /* 尊重用户浏览器设置 */
+  --line-height: 1.6;
+  --line-height-heading: 1.25;
+
+  /* 布局 */
+  --container-width: 70rem;
+  --container-padding: 1.5rem;
+
+  /* 圆角 */
+  --radius: 4px;
+  --radius-small: 2px;
+
+  /* 过渡 */
+  --transition: 0.2s ease;
+}
+
+/* 深色 token 已并入上面的 light-dark()，不再需要 prefers-color-scheme 覆盖块。
+   下面两条只是让 data-theme 这个常见约定也能驱动 color-scheme：
+   宿主页面自己写了同类规则时它们会被覆盖，没有时也能直接 <html data-theme="dark">。 */
+:root[data-theme="light"] {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   2. 基础重置（精简自 Pure.css base + Normalize.css）
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height);
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+/* ==========================================================================
+   3. 语义化容器（借鉴 Pico.css classless）
+   ========================================================================== */
+
+:where(body > header, body > main, body > footer) {
+  width: 100%;
+  max-width: var(--container-width);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+body > header,
+body > footer {
+  padding-block: 1rem;
+}
+
+body > footer {
+  margin-top: 2rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* 可选：全宽容器，用于通栏内容 */
+:where(body > .fluid-header, body > .fluid-main, body > .fluid-footer) {
+  max-width: none;
+}
+
+/* ==========================================================================
+   4. 排版
+   ========================================================================== */
+
+:where(h1, h2, h3, h4, h5, h6) {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-weight: 700;
+  line-height: var(--line-height-heading);
+  color: var(--color-text);
+}
+
+:where(h1) { font-size: 2.25rem; }
+:where(h2) { font-size: 1.75rem; }
+:where(h3) { font-size: 1.375rem; }
+:where(h4) { font-size: 1.125rem; }
+:where(h5) { font-size: 1rem; }
+:where(h6) { font-size: 0.875rem; }
+
+:where(h1, h2, h3, h4, h5, h6):first-child {
+  margin-top: 0;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+:where(ul, ol) {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+
+:where(li) {
+  margin-bottom: 0.25rem;
+}
+
+:where(li > ul, li > ol) {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+:where(dl) {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+:where(dt) {
+  font-weight: 700;
+}
+
+:where(dd) {
+  margin-left: 0;
+  margin-bottom: 0.5rem;
+}
+
+:where(hr) {
+  height: 0;
+  margin-block: 1.5rem;
+  border: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+:where(small) {
+  font-size: 0.875em;
+}
+
+:where(strong, b) {
+  font-weight: 700;
+}
+
+:where(em, i) {
+  font-style: italic;
+}
+
+:where(mark) {
+  padding: 0.1em 0.25em;
+  border-radius: var(--radius-small);
+  background-color: var(--color-mark-bg);
+  color: var(--color-mark-text);
+}
+
+:where(abbr[title]) {
+  text-decoration: underline dotted;
+  text-underline-offset: 0.15em;
+  cursor: help;
+}
+
+:where(sub, sup) {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+:where(sub) { bottom: -0.25em; }
+:where(sup) { top: -0.5em; }
+
+:where(address) {
+  font-style: normal;
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   5. 链接
+   ========================================================================== */
+
+:where(a) {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  transition: color var(--transition);
+}
+
+:where(a:hover) {
+  color: var(--color-link-hover);
+  text-decoration-thickness: 2px;
+}
+
+:where(a:visited) {
+  color: var(--color-link-visited);
+}
+
+:where(a:focus-visible) {
+  outline: none;
+  border-radius: var(--radius-small);
+  box-shadow: var(--focus-ring);
+}
+
+/* ==========================================================================
+   6. 按钮（Pure .pure-button 语义化映射）
+   ========================================================================== */
+
+:where(
+  button,
+  input[type="submit"],
+  input[type="button"],
+  input[type="reset"],
+  ::file-selector-button
+) {
+  display: inline-block;
+  padding: 0.5em 1em;
+  margin: 0;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.15;
+  color: var(--button-text);
+  background-color: var(--button-bg);
+  border: 1px solid var(--button-border);
+  border-radius: var(--radius);
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+}
+
+:where(
+  button:hover,
+  input[type="submit"]:hover,
+  input[type="button"]:hover,
+  input[type="reset"]:hover,
+  ::file-selector-button:hover
+) {
+  background-color: var(--button-bg-hover);
+  background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.05));
+}
+
+:where(
+  button:active,
+  input[type="submit"]:active,
+  input[type="button"]:active,
+  input[type="reset"]:active
+) {
+  background-color: var(--button-bg-active);
+  background-image: none;
+}
+
+:where(
+  button:focus-visible,
+  input[type="submit"]:focus-visible,
+  input[type="button"]:focus-visible,
+  input[type="reset"]:focus-visible
+) {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+:where(
+  button:disabled,
+  input[type="submit"]:disabled,
+  input[type="button"]:disabled,
+  input[type="reset"]:disabled
+) {
+  background-color: var(--button-bg-disabled);
+  background-image: none;
+  color: var(--button-text-disabled);
+  border-color: var(--button-border);
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+/* 小号按钮：通过属性或元素上下文控制，classless 场景保留原始尺寸 */
+
+/* ==========================================================================
+   7. 表单
+   ========================================================================== */
+
+:where(form) {
+  margin-bottom: 1.5rem;
+}
+
+:where(fieldset) {
+  margin: 0 0 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+:where(legend) {
+  padding-inline: 0.25rem;
+  font-weight: 700;
+}
+
+:where(label) {
+  display: block;
+  margin-bottom: 0.4em;
+  font-weight: 600;
+}
+
+/* 复选框/单选框的 label 保持内联 */
+:where(
+  label:has(> input[type="checkbox"]),
+  label:has(> input[type="radio"]),
+  label:has(input[type="checkbox"]),
+  label:has(input[type="radio"])
+) {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-weight: 400;
+  margin-bottom: 0.4em;
+  cursor: pointer;
+}
+
+:where(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]),
+  select,
+  textarea
+) {
+  width: 100%;
+  padding: 0.5em 0.6em;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.15;
+  color: var(--color-text);
+  background-color: var(--input-bg);
+  border: 1px solid var(--input-border);
+  border-radius: var(--radius);
+  box-shadow: var(--input-shadow);
+  vertical-align: middle;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* 保持文件选择、颜色、范围控件合理宽度 */
+:where(input[type="color"]) {
+  width: 3rem;
+  height: 2.5rem;
+  padding: 0.2em;
+}
+
+:where(input[type="range"]) {
+  width: 100%;
+}
+
+:where(input[type="file"]) {
+  display: block;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+/* 下拉箭头（原生保留，仅统一外观） */
+:where(select) {
+  padding-right: 2em;
+  background-image: linear-gradient(45deg, transparent 50%, var(--color-text-muted) 50%),
+    linear-gradient(135deg, var(--color-text-muted) 50%, transparent 50%);
+  background-position: calc(100% - 1.1em) 50%, calc(100% - 0.75em) 50%;
+  background-size: 0.4em 0.4em, 0.4em 0.4em;
+  background-repeat: no-repeat;
+}
+
+:where(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]):focus,
+  select:focus,
+  textarea:focus
+) {
+  outline: none;
+  border-color: var(--color-link);
+  box-shadow: var(--focus-ring);
+}
+
+:where(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="submit"]):not([type="button"]):not([type="reset"]):not([type="range"]):not([type="color"]):not([type="file"]):disabled,
+  select:disabled,
+  textarea:disabled
+) {
+  background-color: var(--color-bg-subtle);
+  color: var(--color-text-muted);
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+:where(textarea) {
+  min-height: 6rem;
+  resize: vertical;
+}
+
+:where(::placeholder) {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+
+:where(input[type="checkbox"], input[type="radio"]) {
+  width: 1em;
+  height: 1em;
+  margin: 0;
+  accent-color: var(--color-link);
+  cursor: pointer;
+}
+
+:where(input[type="checkbox"]:focus-visible, input[type="radio"]:focus-visible) {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--radius-small);
+}
+
+:where(button + button, input + button, button + input) {
+  margin-left: 0.5rem;
+}
+
+/* ==========================================================================
+   8. 表格（Pure .pure-table 语义化映射）
+   ========================================================================== */
+
+:where(table) {
+  width: 100%;
+  margin-bottom: 1rem;
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  font-size: 0.95rem;
+}
+
+:where(caption) {
+  padding: 0.75em 0;
+  font-size: 0.875rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  text-align: center;
+  caption-side: bottom;
+}
+
+:where(table th, table td) {
+  padding: 0.5em 1em;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+  vertical-align: top;
+}
+
+:where(table thead th) {
+  background-color: var(--table-head-bg);
+  font-weight: 700;
+  color: var(--color-text);
+  vertical-align: bottom;
+}
+
+:where(table tbody tr:last-child > *) {
+  border-bottom: 0;
+}
+
+/* 可选的行条纹（无类名情况下，语义化最接近的是 tbody 偶数行） */
+:where(table tbody tr:nth-child(even)) {
+  background-color: var(--table-stripe-bg);
+}
+
+/* 表格横向滚动容器：如果希望长表格可滚动，可包裹在 <figure> 中 */
+:where(figure > table) {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   9. 导航
+   ========================================================================== */
+
+:where(nav ul) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 1.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+:where(nav li) {
+  margin: 0;
+}
+
+:where(nav a) {
+  display: inline-block;
+  padding-block: 0.25rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+:where(nav a:hover) {
+  text-decoration: underline;
+}
+
+:where(nav a[aria-current="page"]) {
+  font-weight: 700;
+  color: var(--color-text);
+  border-bottom: 2px solid var(--color-link);
+}
+
+/* 页脚中的导航 */
+:where(footer nav ul) {
+  font-size: 0.875rem;
+}
+
+/* ==========================================================================
+   10. 引用与代码
+   ========================================================================== */
+
+:where(blockquote) {
+  margin: 0 0 1rem;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  border-left: 4px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+:where(blockquote p:last-child) {
+  margin-bottom: 0;
+}
+
+:where(blockquote cite) {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--color-text-muted);
+}
+
+:where(code, kbd, samp, pre) {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+}
+
+:where(code) {
+  padding: 0.15em 0.35em;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  white-space: nowrap;
+}
+
+:where(pre) {
+  display: block;
+  margin: 0 0 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  line-height: 1.5;
+  -webkit-overflow-scrolling: touch;
+}
+
+:where(pre code) {
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  white-space: pre;
+  font-size: 1em;
+}
+
+:where(kbd) {
+  padding: 0.15em 0.4em;
+  background-color: var(--color-bg-subtle);
+  border: 1px solid var(--color-border-strong);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-small);
+  font-size: 0.85em;
+}
+
+/* ==========================================================================
+   11. 图片与媒体
+   ========================================================================== */
+
+:where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+  max-width: 100%;
+}
+
+:where(img, video) {
+  height: auto;
+}
+
+:where(img) {
+  border-style: none;
+}
+
+:where(figure) {
+  margin: 0 0 1rem;
+}
+
+:where(figcaption) {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* ==========================================================================
+   12. 折叠面板与对话框
+   ========================================================================== */
+
+:where(details) {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-bg-subtle);
+}
+
+:where(summary) {
+  cursor: pointer;
+  font-weight: 600;
+  user-select: none;
+}
+
+:where(summary:focus-visible) {
+  outline: none;
+  border-radius: var(--radius-small);
+  box-shadow: var(--focus-ring);
+}
+
+:where(details[open] > summary) {
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+:where(dialog) {
+  max-width: min(90vw, 40rem);
+  padding: 1.5rem;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+:where(dialog::backdrop) {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* ==========================================================================
+   13. 进度与度量
+   ========================================================================== */
+
+:where(progress, meter) {
+  width: 100%;
+  height: 1rem;
+  vertical-align: middle;
+}
+
+:where(progress) {
+  accent-color: var(--color-link);
+  border-radius: var(--radius-small);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   14. 其他语义元素
+   ========================================================================== */
+
+:where(main, section, article, aside, nav, header, footer) {
+  /* 无额外装饰，保持语义；间距由上下文控制 */
+}
+
+:where(article > *:last-child,
+       section > *:last-child,
+       aside > *:last-child,
+       main > *:last-child) {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   15. 无障碍与动效
+   ========================================================================== */
+
+:where(:focus-visible) {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* 屏幕阅读器专用 */
+:where(.visually-hidden, .sr-only) {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+/* ==========================================================================
+   16. 滚动条（仅暗色模式下微调，保持浏览器一致性）
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  :where(*) {
+    scrollbar-color: var(--color-border-strong) var(--color-bg-subtle);
+    scrollbar-width: thin;
+  }
+}
+
+/* ==========================================================================
+   17. 打印样式
+   ========================================================================== */
+
+@media print {
+  body {
+    display: block;
+    color: #000;
+    background: #fff;
+  }
+
+  :where(a[href]::after) {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #555;
+  }
+
+  :where(nav, footer, header) {
+    display: none;
+  }
+
+  :where(table, pre, blockquote, img) {
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   18. 响应式断点
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  :root {
+    --container-padding: 1rem;
+  }
+
+  :where(h1) { font-size: 1.75rem; }
+  :where(h2) { font-size: 1.5rem; }
+  :where(h3) { font-size: 1.25rem; }
+
+  :where(nav ul) {
+    gap: 0 1rem;
+  }
+
+  :where(table) {
+    font-size: 0.875rem;
+  }
+
+  :where(table th, table td) {
+    padding: 0.4em 0.6em;
+  }
+}
