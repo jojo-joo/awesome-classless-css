@@ -24,6 +24,31 @@ input:disabled {
     border: none;
 }
 
+input[type="color"] {
+    width: 60px;
+    height: 30px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border: 0;
+    border-radius: 0;
+}
+
+input[type="color"]:focus-visible {
+    outline: 2px solid var(--mc);
+    outline-offset: 2px;
+}
+
 select:not([multiple], [size]) {
     width: 100%;
     padding: 2px;
