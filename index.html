@@ -29,143 +29,229 @@
       color-scheme: dark;
     }
 
-    .demo-bar {
-      position: sticky;
-      inset-block-start: 0;
-      z-index: 10;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: .5rem 1rem;
-      padding: .55rem clamp(1rem, 4vw, 2rem);
-      background: light-dark(#ffffff, #16181d);
-      color: light-dark(#191b21, #eceef2);
-      border-block-end: 1px solid light-dark(#0000001f, #ffffff24);
-      font: 0.875rem/1.4 system-ui, -apple-system, sans-serif;
-      /* Frameworks treat <header> as a page-header container (pico centres it at
-         700px, sumi insets it). This is sticky app chrome, so keep it full-bleed. */
-      inline-size: auto;
-      max-inline-size: none;
-      margin-inline: 0;
-    }
+    /* =====================================================================
+       App chrome: two corner buttons (menu / theme) + the framework menu.
+       They must keep their position, size and colour no matter which framework
+       is loaded, so:
 
-    .demo-brand {
-      margin-inline-end: auto;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    /* Theme toggle + framework switcher, always on one line: the toggle first,
-       then the pills. When the pills don't fit (phone widths) the pill strip
-       scrolls sideways instead of wrapping. */
-    .demo-controls {
-      display: flex;
-      flex-wrap: nowrap;
-      align-items: center;
-      gap: .5rem;
-      min-inline-size: 0;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Scoped to .demo-bar to outrank each framework's own <button> rules
-       (pico in particular makes buttons full-width and themed). */
-    .demo-bar .demo-theme {
+       - pinned with position: fixed, so <body> layout cannot move them;
+       - sized in px, so a framework's root font-size cannot rescale them;
+       - reset with `all: unset` and then declared property by property;
+       - matched through their id (:is(#nav-toggle, #theme-toggle) = 1,1,0), so
+         a framework rule like yorha's `button:not(:disabled)` (0,1,1) loses;
+       - offset with `100vw - 100%`, because 100vw counts the scrollbar and any
+         scrollbar-gutter while the fixed containing block does not — without
+         this, frameworks that set `html { scrollbar-gutter: stable }`
+         (fylgja, bullframe, marx) push the right-hand button 15px inwards.
+       ===================================================================== */
+    :is(#nav-toggle, #theme-toggle).demo-fab {
+      all: unset;
+      position: fixed;
+      z-index: 60;
+      box-sizing: border-box;
       display: inline-flex;
-      flex: 0 0 auto;
       align-items: center;
       justify-content: center;
-      inline-size: 2rem;
-      block-size: 2rem;
-      margin: 0;
+      inline-size: 44px;
+      block-size: 44px;
       padding: 0;
-      border: 1px solid light-dark(#0000002e, #ffffff33);
-      border-radius: .45rem;
-      background: transparent;
-      box-shadow: none;
-      color: inherit;
-      font: inherit;
-      line-height: 0;
+      margin: 0;
+      border: 1px solid #0000002e;
+      border-radius: 12px;
+      background: #ffffff;
+      color: #191b21;
+      font: 400 0/0 system-ui, sans-serif;
+      text-align: center;
       cursor: pointer;
-      appearance: none;
-      -webkit-appearance: none;
+      box-shadow: 0 1px 2px #00000014;
     }
 
-    .demo-bar .demo-theme:hover {
-      background: light-dark(#0000000f, #ffffff1f);
+    :root[data-theme="dark"] :is(#nav-toggle, #theme-toggle).demo-fab {
+      border-color: #ffffff33;
+      background: #16181d;
+      color: #eceef2;
+      box-shadow: 0 1px 2px #00000060;
     }
 
-    .demo-bar .demo-theme:focus-visible {
-      outline: 2px solid light-dark(#1a6ee0, #7ab6ff);
+    :is(#nav-toggle, #theme-toggle).demo-fab:hover {
+      background: #f2f3f5;
+    }
+
+    :root[data-theme="dark"] :is(#nav-toggle, #theme-toggle).demo-fab:hover {
+      background: #1f2229;
+    }
+
+    :is(#nav-toggle, #theme-toggle).demo-fab:focus-visible {
+      outline: 2px solid #1a6ee0;
       outline-offset: 2px;
     }
 
-    .demo-bar .demo-theme>svg {
+    :root[data-theme="dark"] :is(#nav-toggle, #theme-toggle).demo-fab:focus-visible {
+      outline-color: #7ab6ff;
+    }
+
+    /* Corners: 16px from the *visual* viewport edge on every framework. */
+    #nav-toggle.demo-fab {
+      inset-block-start: calc(16px - (100vh - 100%));
+      inset-inline-start: 16px;
+    }
+
+    #theme-toggle.demo-fab {
+      inset-block-start: calc(16px - (100vh - 100%));
+      inset-inline-end: calc(16px - (100vw - 100%));
+    }
+
+    /* Three bars, drawn from spans: no glyph, font or icon font involved. */
+    .demo-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      inline-size: 18px;
+    }
+
+    #nav-toggle .demo-bars span {
       display: block;
-      inline-size: 1.05rem;
-      block-size: 1.05rem;
+      block-size: 2px;
+      border-radius: 1px;
+      background: currentColor;
+    }
+
+    #theme-toggle>svg {
+      display: block;
+      inline-size: 18px;
+      block-size: 18px;
       pointer-events: none;
     }
 
     /* Show the icon of the mode you would switch *to*: moon in light, sun in dark. */
-    .demo-bar .demo-theme .i-sun {
+    #theme-toggle .i-sun {
       display: none;
     }
 
-    :root[data-theme="dark"] .demo-bar .demo-theme .i-sun {
+    :root[data-theme="dark"] #theme-toggle .i-sun {
       display: block;
     }
 
-    :root[data-theme="dark"] .demo-bar .demo-theme .i-moon {
+    :root[data-theme="dark"] #theme-toggle .i-moon {
       display: none;
     }
 
-    /* Framework switcher: radios visually collapsed into pill buttons so the
-       switcher looks identical under all four frameworks. Never wraps — the
-       strip scrolls when it is wider than the screen. */
-    .demo-switch {
+    /* ---- the menu the left button opens: one long vertical list ---------- */
+    /* ---- the menu the left button opens: one long vertical list ----------
+       #fw-menu instead of .demo-menu on purpose: <nav> is a semantic element
+       that frameworks restyle (bahunya makes it full-width), and an id outranks
+       every element and class selector a framework can use. */
+    #fw-menu {
+      all: unset;
+      position: fixed;
+      z-index: 59;
+      box-sizing: border-box;
+      display: block;
+      inset-block-start: 72px;
+      inset-inline: 16px auto;
+      inline-size: min(320px, calc(100vw - 32px));
+      max-block-size: calc(100vh - 88px);
+      overflow: auto;
+      overscroll-behavior: contain;
+      padding: 8px;
+      border: 1px solid #0000002e;
+      border-radius: 14px;
+      background: #ffffff;
+      color: #191b21;
+      box-shadow: 0 12px 32px #0000002e;
+      font: 400 0.875rem/1.4 system-ui, -apple-system, sans-serif;
+    }
+
+    :root[data-theme="dark"] #fw-menu {
+      border-color: #ffffff33;
+      background: #16181d;
+      color: #eceef2;
+      box-shadow: 0 12px 32px #00000080;
+    }
+
+    #fw-menu[hidden] {
+      display: none;
+    }
+
+    #fw-menu .demo-menu-title {
+      margin: 0 0 6px;
+      padding: 6px 8px;
+      font-size: .75rem;
+      font-weight: 600;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+      opacity: .6;
+    }
+
+    /* Framework switcher, as a vertical menu: one full-width row per framework,
+       radio still the source of truth so the existing JS keeps working.
+       align-items: stretch is explicit because materia ships a global
+       `div { align-items: center }`, which would centre every row. */
+    #fw-menu .demo-switch {
       display: flex;
-      flex-wrap: nowrap;
-      gap: .25rem;
-      min-inline-size: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 2px;
       margin: 0;
       padding: 0;
     }
 
-    .demo-switch::-webkit-scrollbar {
-      display: none;
-    }
-
-    .demo-switch label {
+    #fw-menu .demo-switch label {
       position: relative;
-      flex: 0 0 auto;
-      display: inline-flex;
+      display: flex;
       align-items: center;
+      gap: 8px;
       margin: 0;
-      padding: .28rem .7rem;
-      border: 1px solid light-dark(#0000002e, #ffffff33);
-      border-radius: .45rem;
+      padding: 8px 10px;
+      border: 0;
+      border-radius: 8px;
       color: inherit;
       font: inherit;
-      line-height: 1.4;
+      line-height: 1.3;
       white-space: nowrap;
       cursor: pointer;
     }
 
-    .demo-switch label:has(input:checked) {
-      background: light-dark(#191b21, #eceef2);
-      border-color: transparent;
-      color: light-dark(#ffffff, #16181d);
+    /* radio dot, so the list reads as a menu rather than as plain text */
+    #fw-menu .demo-switch label::before {
+      content: "";
+      flex: 0 0 auto;
+      inline-size: 7px;
+      block-size: 7px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      opacity: .5;
     }
 
-    .demo-switch label:has(input:focus-visible) {
-      outline: 2px solid light-dark(#1a6ee0, #7ab6ff);
-      outline-offset: 2px;
+    #fw-menu .demo-switch label:hover {
+      background: #0000000f;
     }
 
-    .demo-switch input {
+    :root[data-theme="dark"] #fw-menu .demo-switch label:hover {
+      background: #ffffff14;
+    }
+
+    #fw-menu .demo-switch label:has(input:checked) {
+      background: #191b21;
+      color: #ffffff;
+    }
+
+    :root[data-theme="dark"] #fw-menu .demo-switch label:has(input:checked) {
+      background: #eceef2;
+      color: #16181d;
+    }
+
+    #fw-menu .demo-switch label:has(input:checked)::before {
+      background: currentColor;
+      opacity: 1;
+    }
+
+    #fw-menu .demo-switch label:has(input:focus-visible) {
+      outline: 2px solid #1a6ee0;
+      outline-offset: -2px;
+    }
+
+    #fw-menu .demo-switch input {
       position: absolute;
       inset-block-start: 50%;
       inset-inline-start: 50%;
@@ -187,7 +273,8 @@
       box-sizing: border-box;
       max-inline-size: 62rem;
       margin-inline: auto;
-      padding: clamp(1rem, 4vw, 2rem) clamp(1rem, 4vw, 2rem) 5rem;
+      /* block-start clears the two fixed corner buttons (16px offset + 44px + gap) */
+      padding: 76px clamp(1rem, 4vw, 2rem) 5rem;
     }
 
     /* Two-column "label | control" grid, one row per control. */
@@ -324,29 +411,34 @@
 </head>
 
 <body>
-  <header class="demo-bar">
-    <span class="demo-brand">Classless CSS · Form Test</span>
+  <!-- Chrome buttons, pinned to the viewport corners: the menu button top-left,
+       the theme toggle top-right. See .demo-fab in the stylesheet — they are
+       deliberately independent of <body> styling. -->
+  <button type="button" class="demo-fab demo-fab--nav" id="nav-toggle" aria-expanded="false"
+    aria-controls="fw-menu" aria-label="Choose a CSS framework" title="Choose a CSS framework">
+    <span class="demo-bars" aria-hidden="true"><span></span><span></span><span></span></span>
+  </button>
 
-    <nav class="demo-controls" aria-label="Demo controls">
-      <button type="button" class="demo-theme" id="theme-toggle" aria-label="Switch to dark theme"
-        title="Switch to dark theme">
-        <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          aria-hidden="true" focusable="false">
-          <circle cx="12" cy="12" r="4.2" />
-          <path
-            d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
-        </svg>
-        <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z" />
-        </svg>
-      </button>
+  <button type="button" class="demo-fab demo-fab--theme" id="theme-toggle" aria-label="Switch to dark theme"
+    title="Switch to dark theme">
+    <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4.2" />
+      <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.4 5.4l1.6 1.6M17 17l1.6 1.6M18.6 5.4L17 7M7 17l-1.6 1.6" />
+    </svg>
+    <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+      stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="M20.5 14.8A8.6 8.6 0 0 1 9.2 3.5a8.6 8.6 0 1 0 11.3 11.3Z" />
+    </svg>
+  </button>
 
-      <!-- Pills are generated from the keys of the `frameworks` map in the
-           script at the bottom of this file. Do not hand-write them here. -->
-      <div class="demo-switch" role="radiogroup" aria-label="CSS framework"></div>
-    </nav>
-  </header>
+  <nav class="demo-menu" id="fw-menu" hidden aria-label="CSS framework">
+    <p class="demo-menu-title">Classless CSS · Form Test</p>
+
+    <!-- Items are generated from the keys of the `frameworks` map in the
+         script at the bottom of this file. Do not hand-write them here. -->
+    <div class="demo-switch" role="radiogroup" aria-label="CSS framework"></div>
+  </nav>
 
   <main class="demo-main">
 
@@ -574,28 +666,134 @@
     // 全部走 CDN（jsDelivr，版本锁定）。raw.githubusercontent.com 返回
     // text/plain，浏览器会以 MIME 不符拒绝应用样式表，所以 GitHub 源码用
     // jsDelivr 的 gh 通道代替官方直链/官网直链。
-    const frameworks = {
-      pico: [
-        'https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.classless.min.css'
-      ],
-      sumi: [
-        // @main 会漂移，锁定到 commit 才能和其它几项（npm 版本号）一样可复现
-        'https://cdn.jsdelivr.net/gh/vladocar/Sumi.css@d823a5fcf09f11a62f4c585a03b82a3499a36f68/sumi.min.css'
-      ],
-      missing: [
-        'https://cdn.jsdelivr.net/npm/missing.css@1.3.0/dist/missing.min.css'
-      ],
-      fylgja: [
-        'https://cdn.jsdelivr.net/npm/@fylgja/tokens@2.2.1/css/index.min.css',
-        'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/index.min.css',
-        'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/theme.css',
-        'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/form-class-less.css',
-        'https://cdn.jsdelivr.net/npm/@fylgja/utilities@2.1.4/index.min.css'
-      ],
-      // materia.css / pure.classless.css 是本地自有文件，没有公开地址，只能本地引用。
-      materia: ['css/materia.css'],
-      pure: ['css/pure.classless.css']
-    };
+const frameworks = {
+  // ===== 原有配置（未改动） =====
+  pico: [
+    'https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.classless.min.css'
+  ],
+  sumi: [
+    'https://cdn.jsdelivr.net/gh/vladocar/Sumi.css@d823a5fcf09f11a62f4c585a03b82a3499a36f68/sumi.min.css'
+  ],
+  missing: [
+    'https://cdn.jsdelivr.net/npm/missing.css@1.3.0/dist/missing.min.css'
+  ],
+  fylgja: [
+    'https://cdn.jsdelivr.net/npm/@fylgja/tokens@2.2.1/css/index.min.css',
+    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/index.min.css',
+    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/theme.css',
+    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/form-class-less.css',
+    'https://cdn.jsdelivr.net/npm/@fylgja/utilities@2.1.4/index.min.css'
+  ],
+  materia: ['css/materia.css'],
+  pure: ['css/pure.classless.css'],
+
+  // ===== 以下为新增的 Classless CSS 项目 =====
+  almond: [
+    'https://cdn.jsdelivr.net/gh/alvaromontoro/almond.css@latest/dist/almond.min.css'
+  ],
+  attricss: [
+    'https://cdn.jsdelivr.net/gh/raj457036/attriCSS@master/attriCSS.min.css'
+  ],
+  awsm: [
+    'https://unpkg.com/awsm.css/dist/awsm.min.css'
+  ],
+  axist: [
+    'https://unpkg.com/axist@latest/dist/axist.min.css'
+  ],
+  bahunya: [
+    'https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
+  ],
+  bamboo: [
+    'https://unpkg.com/bamboo.css'
+  ],
+  barecss: [
+    'https://cdn.jsdelivr.net/npm/bare-css@2.0.3/css/bare.min.css'
+  ],
+  basiccss: [
+    'https://cdn.jsdelivr.net/npm/@vladocar/basic.css/css/basic.css'
+  ],
+  bolt: [
+    'https://unpkg.com/boltcss/bolt.min.css'
+  ],
+  blades: [
+    'https://cdn.jsdelivr.net/npm/@anyblades/blades@3/css/blades.min.css'
+  ],
+  bullframe: [
+    'https://cdn.jsdelivr.net/npm/bullframe.css@6/dist/css/bullframe-system-default.min.css'
+  ],
+  chimeracss: [
+    'https://cdn.jsdelivr.net/npm/chimeracss@1.6.2/build/chimera.min.css'
+  ],
+  classlesscss: [
+    'https://cdn.jsdelivr.net/gh/digitallytailored/classless@latest/classless.min.css'
+  ],
+  concrete: [
+    'https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.min.css'
+  ],
+  devcss: [
+    'https://cdn.jsdelivr.net/npm/@intergrav/dev.css@5'
+  ],
+  holiday: [
+    'https://cdn.jsdelivr.net/npm/holiday.css@0.11.2/holiday.css'
+  ],
+  latex: [
+    'https://unpkg.com/latex.css/style.min.css'
+  ],
+  magick: [
+    'https://unpkg.com/magick.css'
+  ],
+  markdownair: [
+    'https://cdn.jsdelivr.net/npm/markdown-air@0.0.4/css/air.min.css'
+  ],
+  marx: [
+    'https://cdn.jsdelivr.net/npm/marx-css@5/css/marx.min.css'
+  ],
+  mercury: [
+    'https://cdn.jsdelivr.net/npm/mercury-css@1.0.0/dist/mercury.min.css'
+  ],
+  mvp: [
+    'https://unpkg.com/mvp.css'
+  ],
+  newcss: [
+    'https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css'
+  ],
+  nimble: [
+    'https://cdn.jsdelivr.net/npm/@leftium/nimble.css/dist/nimble.min.css'
+  ],
+  ridge: [
+    'https://cdn.jsdelivr.net/gh/swlkr/ridgecss@master/ridge.css'
+  ],
+  sakura: [
+    'https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css'
+  ],
+  shadcnclassless: [
+    'https://cdn.jsdelivr.net/gh/fordus/shadcn-classless@main/dist/shadcn-classless.css'
+  ],
+  simple: [
+    'https://cdn.simplecss.org/simple.min.css'
+  ],
+  spcss: [
+    'https://cdn.jsdelivr.net/npm/spcss@0.9.0'
+  ],
+  stylize: [
+    'https://cdn.jsdelivr.net/gh/vasanthv/stylize.css@master/stylize.css'
+  ],
+  tacit: [
+    'https://cdn.jsdelivr.net/npm/tacit-css@1.9.7/dist/tacit-css.min.css'
+  ],
+  tufte: [
+    'https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css'
+  ],
+  water: [
+    'https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css'
+  ],
+  writ: [
+    'https://writ.cmcenroe.me/1.0.4/writ.min.css'
+  ],
+  yorha: [
+    'https://cdn.jsdelivr.net/npm/yorha@1.2.0/dist/yorha.min.css'
+  ]
+};
 
     // Framework sheets are inserted *before* this page's <style>, so that the
     // page chrome (bar, grid, column widths) always wins a specificity tie.
@@ -640,6 +838,31 @@
       if (input.name !== 'fw') return;
       try { history.replaceState(null, '', '#' + input.value); } catch { }
       loadFramework(input.value);
+      setMenuOpen(false);
+    });
+
+    // --- framework menu ----------------------------------------------------
+    const navToggle = document.getElementById('nav-toggle');
+    const fwMenu = document.getElementById('fw-menu');
+
+    function setMenuOpen(open) {
+      fwMenu.hidden = !open;
+      navToggle.setAttribute('aria-expanded', String(open));
+    }
+
+    navToggle.addEventListener('click', () => setMenuOpen(fwMenu.hidden));
+
+    // Escape and outside clicks close it, like any dropdown.
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !fwMenu.hidden) {
+        setMenuOpen(false);
+        navToggle.focus();
+      }
+    });
+
+    document.addEventListener('pointerdown', event => {
+      if (fwMenu.hidden || event.target.closest('#fw-menu, #nav-toggle')) return;
+      setMenuOpen(false);
     });
 
     // --- theme toggle ------------------------------------------------------
