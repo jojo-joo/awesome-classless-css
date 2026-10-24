@@ -136,7 +136,35 @@
       display: none;
     }
 
-    /* ---- the menu the left button opens: one long vertical list ---------- */
+    /* ---- current framework name, centred in the toolbar -------------------
+       Pinned and id-matched for the same reason as the two buttons: nothing a
+       framework does to <body> may shift, resize or recolour it. pointer-events
+       are off so it never steals a click from what is behind it. */
+    #fw-name {
+      all: unset;
+      position: fixed;
+      z-index: 59;
+      box-sizing: border-box;
+      display: block;
+      inset-block-start: calc(16px - (100vh - 100%));
+      /* the inline-end value is pulled in by the scrollbar width too, otherwise
+         a framework with `html { scrollbar-gutter: stable }` (fylgja,
+         bullframe, marx, nimble) shifts the label 7.5px off centre */
+      inset-inline: 72px calc(72px - (100vw - 100%));
+      block-size: 44px;
+      overflow: hidden;
+      color: #191b21;
+      font: 600 14px/44px system-ui, -apple-system, sans-serif;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      pointer-events: none;
+    }
+
+    :root[data-theme="dark"] #fw-name {
+      color: #eceef2;
+    }
+
     /* ---- the menu the left button opens: one long vertical list ----------
        #fw-menu instead of .demo-menu on purpose: <nav> is a semantic element
        that frameworks restyle (bahunya makes it full-width), and an id outranks
@@ -277,6 +305,14 @@
       padding: 76px clamp(1rem, 4vw, 2rem) 5rem;
     }
 
+    /* The demo form must never be wider than its column: some frameworks pad or
+       fix the width of <form> itself (mvp adds 1.5rem padding content-box). */
+    .demo-form {
+      box-sizing: border-box;
+      inline-size: 100%;
+      max-inline-size: 100%;
+    }
+
     /* Two-column "label | control" grid, one row per control. */
     .demo-field {
       display: grid;
@@ -304,6 +340,18 @@
 
     .demo-form .demo-field> :is(input, select, textarea):not([type="color"]) {
       inline-size: 100%;
+      /* some frameworks give form controls a px min-width (almond: 240px), which
+         on a phone is wider than the whole control column and pushes a
+         horizontal scrollbar. The demo column is always allowed to shrink. */
+      min-inline-size: 0;
+      /* and a framework's own padding must not be added on top of 100% */
+      box-sizing: border-box;
+    }
+
+    /* The colour swatch keeps its 60px size (materia) but may not inherit a
+       framework min-width either. */
+    .demo-form .demo-field> input[type="color"] {
+      min-inline-size: 0;
     }
 
     /* The Gender row carries the `.seg` markup so materia can render a segmented
@@ -418,6 +466,10 @@
     aria-controls="fw-menu" aria-label="Choose a CSS framework" title="Choose a CSS framework">
     <span class="demo-bars" aria-hidden="true"><span></span><span></span><span></span></span>
   </button>
+
+  <!-- Current framework, kept in the middle of the toolbar. Filled by
+       loadFramework() so it can never drift from the active stylesheet. -->
+  <span id="fw-name" aria-live="polite"></span>
 
   <button type="button" class="demo-fab demo-fab--theme" id="theme-toggle" aria-label="Switch to dark theme"
     title="Switch to dark theme">
@@ -534,7 +586,10 @@
 
       <div class="demo-field">
         <span class="demo-label" id="gender-label">Gender</span>
-        <div class="seg" role="group" aria-labelledby="gender-label">
+        <!-- role="radiogroup" (not "group"): it IS a radio group, and several
+             frameworks style [role="group"] as a joined inline-flex row, which
+             can no longer fit — and then pushed a horizontal scrollbar. -->
+        <div class="seg" role="radiogroup" aria-labelledby="gender-label">
           <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
           <label><input type="radio" name="gender" value="m"><span>Male</span></label>
           <label><input type="radio" name="gender" value="x"><span>None</span></label>
@@ -814,6 +869,10 @@ const frameworks = {
         link.dataset.framework = '';
         document.head.insertBefore(link, pageStyle);
       }
+
+      // Single place that knows the active framework, so the toolbar label can
+      // never disagree with the stylesheet actually loaded.
+      document.getElementById('fw-name').textContent = name;
     }
 
     // The nav pills are generated from Object.keys(frameworks): adding a
