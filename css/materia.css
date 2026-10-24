@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --mc: #2196F3;
     accent-color: var(--mc);
 }
@@ -23,6 +23,13 @@ input:not([type="checkbox"], [type="radio"]) {
 
 input:disabled {
     border: none;
+}
+
+input[type="checkbox"]:not([role="switch"]) {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    vertical-align: middle;
 }
 
 input[type="color"] {
