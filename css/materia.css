@@ -5,6 +5,7 @@
 
 body {
     font-family: system-ui, "HarmonyOS Sans", sans-serif;
+    color: light-dark(#000, #c2c7d0);
 }
 
 div {
@@ -18,11 +19,22 @@ input:not([type="checkbox"], [type="radio"]) {
     padding: 2px;
     border: none;
     border-bottom: 1px solid var(--mc);
+    background-color: transparent;
     outline: none;
+}
+
+textarea {
+    background-color: transparent;
 }
 
 input:disabled {
     border: none;
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+    opacity: 0.5;
 }
 
 input[type="checkbox"]:not([role="switch"]) {
@@ -116,6 +128,7 @@ input,
 select,
 textarea {
     font-size: 1rem;
+    color: light-dark(#000, #e0e3e7);
 }
 
 button {
