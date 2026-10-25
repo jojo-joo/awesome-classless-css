@@ -1,0 +1,1202 @@
+[
+  {
+    "slug": "almond",
+    "title": "Almond.CSS",
+    "kind": "classless",
+    "homepage": "https://github.com/alvaromontoro/almond.css",
+    "demo": "https://alvaromontoro.github.io/almond.css/demo/",
+    "stars": 1169,
+    "version": "v1.2.2",
+    "file": "css/almond.min.css",
+    "bytes": 20233,
+    "downloaded": true,
+    "upstream": {
+      "repo": "alvaromontoro/almond.css",
+      "ref": "v1.2.2",
+      "tag": "v1.2.2",
+      "commit": "b6315aa0dc862a5d3ab02902d7be134c394d93e3",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "attricss",
+    "title": "attriCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/raj457036/attriCSS",
+    "demo": "https://raj457036.github.io/attriCSS/",
+    "stars": 58,
+    "version": "master@3160620",
+    "file": "css/attricss.min.css",
+    "bytes": 4292,
+    "downloaded": true,
+    "upstream": {
+      "repo": "raj457036/attriCSS",
+      "ref": "master",
+      "tag": null,
+      "commit": "31606202623b55454f8d67a75f77b814695121cb",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "awsm",
+    "title": "awsm.css",
+    "kind": "classless",
+    "homepage": "https://www.npmjs.com/package/awsm.css",
+    "demo": "https://igoradamenko.com/awsm.css/v2/elements.html",
+    "stars": 0,
+    "version": "v3.0.7",
+    "file": "css/awsm.min.css",
+    "bytes": 13451,
+    "downloaded": true,
+    "upstream": {
+      "repo": "",
+      "ref": null,
+      "tag": null,
+      "commit": null,
+      "minified": null
+    },
+    "note": "原官网与 GitHub 仓库均已下线，取自官方 npm 包 awsm.css@3.0.7 的 dist/awsm.min.css"
+  },
+  {
+    "slug": "axist",
+    "title": "axist",
+    "kind": "classless",
+    "homepage": "https://github.com/ruanmartinelli/axist",
+    "demo": "https://ruanmartinelli.github.io/axist/",
+    "stars": 111,
+    "version": "v1.0.0",
+    "file": "css/axist.min.css",
+    "bytes": 6872,
+    "downloaded": true,
+    "upstream": {
+      "repo": "ruanmartinelli/axist",
+      "ref": "v1.0.0",
+      "tag": "v1.0.0",
+      "commit": "ab61a222534639727efe2776aad84230d5ecdbc9",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "bahunya",
+    "title": "Bahunya",
+    "kind": "classless",
+    "homepage": "https://github.com/Kimeiga/bahunya",
+    "demo": "https://kimeiga.github.io/bahunya/",
+    "stars": 312,
+    "version": "master@4c92348",
+    "file": "css/bahunya.min.css",
+    "bytes": 19048,
+    "downloaded": true,
+    "upstream": {
+      "repo": "Kimeiga/bahunya",
+      "ref": "master",
+      "tag": null,
+      "commit": "4c92348f5648b8ad9d7d884681fe4745b6457432",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "bamboo",
+    "title": "Bamboo CSS",
+    "kind": "classless",
+    "homepage": "https://github.com/rilwis/bamboo",
+    "demo": "https://rilwis.github.io/bamboo/demo/",
+    "stars": 283,
+    "version": "master@f7fdb9b",
+    "file": "css/bamboo.min.css",
+    "bytes": 5280,
+    "downloaded": true,
+    "upstream": {
+      "repo": "rilwis/bamboo",
+      "ref": "master",
+      "tag": null,
+      "commit": "f7fdb9b8002bbee7aa22b0ea17103686d503308a",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "barecss",
+    "title": "BareCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/longsien/BareCSS",
+    "demo": "https://web.archive.org/web/20191010034508/http://barecss.com/",
+    "stars": 117,
+    "version": "v1.1.0",
+    "file": "css/barecss.min.css",
+    "bytes": 18639,
+    "downloaded": true,
+    "upstream": {
+      "repo": "longsien/BareCSS",
+      "ref": "v1.1.0",
+      "tag": "v1.1.0",
+      "commit": "3fb2af6d72775efe510773a1726d39c5a04673a9",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "barrel",
+    "title": "Barrel.css",
+    "kind": "class-light",
+    "homepage": "https://github.com/EternityForest/barrel.css",
+    "demo": "https://eternityforest.github.io/barrel.css/",
+    "stars": 7,
+    "version": "v0.5.2",
+    "file": "css/barrel.min.css",
+    "bytes": 34971,
+    "downloaded": true,
+    "upstream": {
+      "repo": "EternityForest/barrel.css",
+      "ref": "v0.5.2",
+      "tag": "v0.5.2",
+      "commit": "e946ce908c4698f34ce87f6a0217d70799002275",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "basiccss",
+    "title": "Basic.css",
+    "kind": "classless",
+    "homepage": "https://github.com/vladocar/Basic.css",
+    "demo": "https://vladocar.github.io/Basic.css/",
+    "stars": 686,
+    "version": "master@681d40a",
+    "file": "css/basiccss.min.css",
+    "bytes": 2258,
+    "downloaded": true,
+    "upstream": {
+      "repo": "vladocar/Basic.css",
+      "ref": "master",
+      "tag": null,
+      "commit": "681d40a463fe09c37285f242cc5178f3d4cff5ef",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "blades",
+    "title": "Blades",
+    "kind": "classless",
+    "homepage": "https://github.com/anyblades/blades",
+    "demo": "",
+    "stars": 385,
+    "version": "v3.1.0-beta.6",
+    "file": "css/blades.min.css",
+    "bytes": 76910,
+    "downloaded": true,
+    "upstream": {
+      "repo": "anyblades/blades",
+      "ref": "v3.1.0-beta.6",
+      "tag": "v3.1.0-beta.6",
+      "commit": "f9229a897f6e5e0b37b826eef7d61b10af04800b",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "bolt",
+    "title": "Bolt.css",
+    "kind": "classless",
+    "homepage": "https://github.com/tbolt/boltcss",
+    "demo": "https://boltcss.com/",
+    "stars": 586,
+    "version": "v1.0.1",
+    "file": "css/bolt.min.css",
+    "bytes": 7888,
+    "downloaded": true,
+    "upstream": {
+      "repo": "tbolt/boltcss",
+      "ref": "v1.0.1",
+      "tag": "v1.0.1",
+      "commit": "e7001c7be5c5b038d4644e6c0048f65319bd5567",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "bullframe",
+    "title": "bullframe.css",
+    "kind": "classless",
+    "homepage": "https://github.com/marcop135/bullframe.css",
+    "demo": "https://bullframecss.marcopontili.com/kitchen-sink/",
+    "stars": 47,
+    "version": "v6.4.2",
+    "file": "css/bullframe.min.css",
+    "bytes": 18873,
+    "downloaded": true,
+    "upstream": {
+      "repo": "marcop135/bullframe.css",
+      "ref": "v6.4.2",
+      "tag": "v6.4.2",
+      "commit": "bb3e3c719e4e1771908b787e6d602339d69fc57c",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "chimeracss",
+    "title": "ChimeraCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/ChimeraCSS/ChimeraCSS",
+    "demo": "https://chimera-demo.vercel.app/",
+    "stars": 25,
+    "version": "main@b3f0bad",
+    "file": "css/chimeracss.min.css",
+    "bytes": 5313,
+    "downloaded": true,
+    "upstream": {
+      "repo": "ChimeraCSS/ChimeraCSS",
+      "ref": "main",
+      "tag": null,
+      "commit": "b3f0badb2e4a11e6bf2e9f86eb7d7aabc28d47ac",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "chota",
+    "title": "Chota",
+    "kind": "class-light",
+    "homepage": "https://github.com/jenil/chota",
+    "demo": "https://jenil.github.io/chota/",
+    "stars": 1550,
+    "version": "v0.8.1",
+    "file": "css/chota.min.css",
+    "bytes": 18547,
+    "downloaded": true,
+    "upstream": {
+      "repo": "jenil/chota",
+      "ref": "v0.8.1",
+      "tag": "v0.8.1",
+      "commit": "a6bf7248690449ca176f37464240530866709c7b",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "classlesscss",
+    "title": "Classless.css",
+    "kind": "classless",
+    "homepage": "https://github.com/emareg/classlesscss",
+    "demo": "http://classless.de/",
+    "stars": 274,
+    "version": "v1.1",
+    "file": "css/classlesscss.min.css",
+    "bytes": 9223,
+    "downloaded": true,
+    "upstream": {
+      "repo": "emareg/classlesscss",
+      "ref": "v1.1",
+      "tag": "v1.1",
+      "commit": "a24d123190f5997479fc3e6e13fa0047298af4df",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "concrete",
+    "title": "concrete.css",
+    "kind": "classless",
+    "homepage": "https://github.com/louismerlin/concrete.css",
+    "demo": "https://concrete.style/",
+    "stars": 633,
+    "version": "v3.0.0",
+    "file": "css/concrete.min.css",
+    "bytes": 2894,
+    "downloaded": true,
+    "upstream": {
+      "repo": "louismerlin/concrete.css",
+      "ref": "v3.0.0",
+      "tag": "v3.0.0",
+      "commit": "5369411028e95adaa7e97a2067b2270e82b81328",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "devcss",
+    "title": "dev.css",
+    "kind": "classless",
+    "homepage": "https://github.com/intergrav/dev.css",
+    "demo": "https://devcss.devins.page/",
+    "stars": 38,
+    "version": "main@8fa5836",
+    "file": "css/devcss.min.css",
+    "bytes": 5448,
+    "downloaded": true,
+    "upstream": {
+      "repo": "intergrav/dev.css",
+      "ref": "main",
+      "tag": null,
+      "commit": "8fa5836f010ebb3218e4b82f0ffa5c8a9ec71fd3",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "downstyler",
+    "title": "Downstyler",
+    "kind": "classless",
+    "homepage": "https://github.com/waldyrious/downstyler",
+    "demo": "https://waldyrious.github.io/downstyler",
+    "stars": 40,
+    "version": "master@4c681a4",
+    "file": "css/downstyler.min.css",
+    "bytes": 1708,
+    "downloaded": true,
+    "upstream": {
+      "repo": "waldyrious/downstyler",
+      "ref": "master",
+      "tag": null,
+      "commit": "4c681a41d852381fae0fc476faaefcccaf616c44",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "fylgja",
+    "title": "Fylgja",
+    "kind": "classless",
+    "homepage": "https://github.com/fylgja/fylgja",
+    "demo": "https://codepen.io/Fylgja/pen/ExGOZaE",
+    "stars": 116,
+    "version": "v2.2.1",
+    "file": "css/fylgja.min.css",
+    "bytes": 44261,
+    "downloaded": true,
+    "upstream": {
+      "repo": "fylgja/fylgja",
+      "ref": "2.2.1",
+      "tag": "2.2.1",
+      "commit": "d85f31ecdb3bd56c2341ecf859cc7cd839cc3d36",
+      "minified": null
+    },
+    "note": "官方 5 个包按 tokens → base → theme → form-class-less → utilities 顺序拼接"
+  },
+  {
+    "slug": "holiday",
+    "title": "holiday.css",
+    "kind": "classless",
+    "homepage": "https://github.com/EvgenyOrekhov/holiday.css",
+    "demo": "https://holidaycss.js.org/",
+    "stars": 164,
+    "version": "v0.11.6",
+    "file": "css/holiday.min.css",
+    "bytes": 19210,
+    "downloaded": true,
+    "upstream": {
+      "repo": "EvgenyOrekhov/holiday.css",
+      "ref": "v0.11.6",
+      "tag": "v0.11.6",
+      "commit": "c83d24f3b97935f993190b8e664993f0ddf2ba10",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "latex",
+    "title": "LatexCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/davidrzs/latexcss",
+    "demo": "https://davidrzs.github.io/latexcss/",
+    "stars": 178,
+    "version": "master@9264a50",
+    "file": "css/latex.min.css",
+    "bytes": 304731,
+    "downloaded": true,
+    "upstream": {
+      "repo": "davidrzs/latexcss",
+      "ref": "master",
+      "tag": null,
+      "commit": "9264a50c252d47fbe6d4998dbc5581882d79ab3c",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "magick",
+    "title": "magick.css",
+    "kind": "classless",
+    "homepage": "https://github.com/wintermute-cell/magick.css",
+    "demo": "https://css.winterveil.net/",
+    "stars": 1040,
+    "version": "master@cdec42a",
+    "file": "css/magick.min.css",
+    "bytes": 6594,
+    "downloaded": true,
+    "upstream": {
+      "repo": "wintermute-cell/magick.css",
+      "ref": "master",
+      "tag": null,
+      "commit": "cdec42a1cd816eaa33b0ec9825b4aeb4d48695ab",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "markdownair",
+    "title": "Markdown CSS — Air",
+    "kind": "classless",
+    "homepage": "https://github.com/markdowncss/air",
+    "demo": "https://markdowncss.github.io/air/",
+    "stars": 107,
+    "version": "master@f31f83d",
+    "file": "css/markdownair.min.css",
+    "bytes": 1676,
+    "downloaded": true,
+    "upstream": {
+      "repo": "markdowncss/air",
+      "ref": "master",
+      "tag": null,
+      "commit": "f31f83d874e0597a6ca95084e147f088531170ec",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "markdownmodest",
+    "title": "Markdown CSS — Modest",
+    "kind": "classless",
+    "homepage": "https://github.com/markdowncss/modest",
+    "demo": "https://markdowncss.github.io/modest/",
+    "stars": 132,
+    "version": "master@f16599c",
+    "file": "css/markdownmodest.min.css",
+    "bytes": 1982,
+    "downloaded": true,
+    "upstream": {
+      "repo": "markdowncss/modest",
+      "ref": "master",
+      "tag": null,
+      "commit": "f16599c66745808b363f0797d4e89a7d3e7c6e73",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "markdownretro",
+    "title": "Markdown CSS — Retro",
+    "kind": "classless",
+    "homepage": "https://github.com/markdowncss/retro",
+    "demo": "https://markdowncss.github.io/retro/",
+    "stars": 129,
+    "version": "master@3171af7",
+    "file": "css/markdownretro.min.css",
+    "bytes": 1654,
+    "downloaded": true,
+    "upstream": {
+      "repo": "markdowncss/retro",
+      "ref": "master",
+      "tag": null,
+      "commit": "3171af759c8cf61b990c65846d35a0dfb4031824",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "markdownsplendor",
+    "title": "Markdown CSS — Splendor",
+    "kind": "classless",
+    "homepage": "https://github.com/markdowncss/splendor",
+    "demo": "https://markdowncss.github.io/splendor/",
+    "stars": 180,
+    "version": "master@40db295",
+    "file": "css/markdownsplendor.min.css",
+    "bytes": 1888,
+    "downloaded": true,
+    "upstream": {
+      "repo": "markdowncss/splendor",
+      "ref": "master",
+      "tag": null,
+      "commit": "40db29539e4e8c733dec7f941833dcc21ed60504",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "marx",
+    "title": "Marx",
+    "kind": "classless",
+    "homepage": "https://github.com/mblode/marx",
+    "demo": "https://codepen.io/mblode/details/JdYbJj",
+    "stars": 1710,
+    "version": "v5.3.2",
+    "file": "css/marx.min.css",
+    "bytes": 16979,
+    "downloaded": true,
+    "upstream": {
+      "repo": "mblode/marx",
+      "ref": "v5.3.2",
+      "tag": "v5.3.2",
+      "commit": "af76a24cf22e622750c332fb9723e34d48385590",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "matcha",
+    "title": "matcha.css",
+    "kind": "class-light",
+    "homepage": "https://github.com/lowlighter/matcha",
+    "demo": "https://matcha.mizu.sh/",
+    "stars": 1942,
+    "version": "v3.0.0",
+    "file": "css/matcha.min.css",
+    "bytes": 37417,
+    "downloaded": true,
+    "upstream": {
+      "repo": "lowlighter/matcha",
+      "ref": "3.0.0",
+      "tag": "3.0.0",
+      "commit": "0cf0f30fb9bd96b561287818575d165bb8228e64",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "materia",
+    "title": "Materia (local)",
+    "kind": "local",
+    "homepage": "https://github.com/jojo-joo/classless-form",
+    "demo": "",
+    "stars": 0,
+    "version": "local",
+    "file": "css/materia.css",
+    "bytes": 6220,
+    "downloaded": false,
+    "upstream": {
+      "repo": "",
+      "ref": null,
+      "tag": null,
+      "commit": null,
+      "minified": null
+    },
+    "note": "本地开发的样式表，不下载"
+  },
+  {
+    "slug": "mercury",
+    "title": "MercuryCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/wmeredith/MercuryCSS",
+    "demo": "https://wmeredith.github.io/MercuryCSS/",
+    "stars": 31,
+    "version": "master@173e953",
+    "file": "css/mercury.min.css",
+    "bytes": 7862,
+    "downloaded": true,
+    "upstream": {
+      "repo": "wmeredith/MercuryCSS",
+      "ref": "master",
+      "tag": null,
+      "commit": "173e9533dcde7a67dbc7d1289281ef27569cb9ef",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "micss",
+    "title": "mi.css",
+    "kind": "classless",
+    "homepage": "https://github.com/FelipeIzolan/mi",
+    "demo": "",
+    "stars": 2,
+    "version": "main@16c2576",
+    "file": "css/micss.min.css",
+    "bytes": 722,
+    "downloaded": true,
+    "upstream": {
+      "repo": "FelipeIzolan/mi",
+      "ref": "main",
+      "tag": null,
+      "commit": "16c257604f9edc93e3e429b55d94dc2006ffc05f",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "milligram",
+    "title": "Milligram",
+    "kind": "class-light",
+    "homepage": "https://github.com/milligram/milligram",
+    "demo": "https://milligram.io/",
+    "stars": 10215,
+    "version": "v1.4.1",
+    "file": "css/milligram.min.css",
+    "bytes": 9014,
+    "downloaded": true,
+    "upstream": {
+      "repo": "milligram/milligram",
+      "ref": "v1.4.1",
+      "tag": "v1.4.1",
+      "commit": "d895f179623b56f3a741854998649c6d0c354533",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "minicss",
+    "title": "mini.css",
+    "kind": "class-light",
+    "homepage": "https://github.com/Chalarangelo/mini.css",
+    "demo": "https://minicss.org/docs",
+    "stars": 2948,
+    "version": "v3.0.1",
+    "file": "css/minicss.min.css",
+    "bytes": 46887,
+    "downloaded": true,
+    "upstream": {
+      "repo": "Chalarangelo/mini.css",
+      "ref": "v3.0.1",
+      "tag": "v3.0.1",
+      "commit": "c2a02c9e55b9f8d11adc470f181acdace54075e8",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "missing",
+    "title": "Missing.css",
+    "kind": "extra",
+    "homepage": "https://github.com/bigskysoftware/missing",
+    "demo": "",
+    "stars": 797,
+    "version": "dev@b74e1c0",
+    "file": "css/missing.min.css",
+    "bytes": 61364,
+    "downloaded": true,
+    "upstream": {
+      "repo": "bigskysoftware/missing",
+      "ref": "dev",
+      "tag": null,
+      "commit": "b74e1c0da398b2a1ae8a91253cd45337dac12559",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "mono",
+    "title": "mono",
+    "kind": "class-light",
+    "homepage": "https://github.com/artalar/mono",
+    "demo": "https://monocss.vercel.app/",
+    "stars": 51,
+    "version": "main@f3c00aa",
+    "file": "css/mono.min.css",
+    "bytes": 10637,
+    "downloaded": true,
+    "upstream": {
+      "repo": "artalar/mono",
+      "ref": "main",
+      "tag": null,
+      "commit": "f3c00aad60d856f912f4a94e2a9e9747155ca687",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "mvp",
+    "title": "MVP.css",
+    "kind": "classless",
+    "homepage": "https://github.com/andybrewer/mvp",
+    "demo": "https://andybrewer.github.io/mvp/",
+    "stars": 5129,
+    "version": "v1.18",
+    "file": "css/mvp.min.css",
+    "bytes": 8171,
+    "downloaded": true,
+    "upstream": {
+      "repo": "andybrewer/mvp",
+      "ref": "v1.18",
+      "tag": "v1.18",
+      "commit": "629ba5eb91362afe2504fdd09a1ac039e2fca420",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "newcss",
+    "title": "new.css",
+    "kind": "classless",
+    "homepage": "https://github.com/xz/new.css",
+    "demo": "https://newcss.net/demo/",
+    "stars": 4051,
+    "version": "v1.1.3",
+    "file": "css/newcss.min.css",
+    "bytes": 4477,
+    "downloaded": true,
+    "upstream": {
+      "repo": "xz/new.css",
+      "ref": "v1.1.3",
+      "tag": "v1.1.3",
+      "commit": "29060bdc136eda99ae0b154c244d216be9247a18",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "nimble",
+    "title": "nimble.css",
+    "kind": "classless",
+    "homepage": "https://github.com/Leftium/nimble.css",
+    "demo": "https://leftium.github.io/nimble.css/demo/",
+    "stars": 10,
+    "version": "v0.24.1",
+    "file": "css/nimble.min.css",
+    "bytes": 31506,
+    "downloaded": true,
+    "upstream": {
+      "repo": "Leftium/nimble.css",
+      "ref": "v0.24.1",
+      "tag": "v0.24.1",
+      "commit": "e2fa71764d15045ecbc58a591aebd460044ab607",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "noclass",
+    "title": "no-class.css",
+    "kind": "classless",
+    "homepage": "https://github.com/davidpaulsson/no-class",
+    "demo": "https://davidpaulsson.github.io/no-class/",
+    "stars": 40,
+    "version": "v1.0.1",
+    "file": "css/noclass.min.css",
+    "bytes": 6953,
+    "downloaded": true,
+    "upstream": {
+      "repo": "davidpaulsson/no-class",
+      "ref": "1.0.1",
+      "tag": "1.0.1",
+      "commit": "c5a9b215e93a7e36045d0fb0a98c9f46415f5b07",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "picnic",
+    "title": "Picnic CSS",
+    "kind": "class-light",
+    "homepage": "https://github.com/franciscop/picnic",
+    "demo": "http://picnicss.com/",
+    "stars": 3879,
+    "version": "master@c05e916",
+    "file": "css/picnic.min.css",
+    "bytes": 39512,
+    "downloaded": true,
+    "upstream": {
+      "repo": "franciscop/picnic",
+      "ref": "master",
+      "tag": null,
+      "commit": "c05e916427a12fa46f830820bee18393e2e6a4e1",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "pico",
+    "title": "Pico.css",
+    "kind": "classless",
+    "homepage": "https://github.com/picocss/pico",
+    "demo": "https://picocss.com/examples/preview/",
+    "stars": 16834,
+    "version": "v2.1.1",
+    "file": "css/pico.min.css",
+    "bytes": 71040,
+    "downloaded": true,
+    "upstream": {
+      "repo": "picocss/pico",
+      "ref": "v2.1.1",
+      "tag": "v2.1.1",
+      "commit": "1039a4788d6abc368d5485ae6bac84a8f0e3096f",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "pure",
+    "title": "Pure Classless (local)",
+    "kind": "local",
+    "homepage": "https://github.com/jojo-joo/classless-form",
+    "demo": "",
+    "stars": 0,
+    "version": "local",
+    "file": "css/pure.classless.css",
+    "bytes": 20473,
+    "downloaded": false,
+    "upstream": {
+      "repo": "",
+      "ref": null,
+      "tag": null,
+      "commit": null,
+      "minified": null
+    },
+    "note": "本地开发的样式表，不下载"
+  },
+  {
+    "slug": "ridge",
+    "title": "ridge.css",
+    "kind": "classless",
+    "homepage": "https://github.com/swlkr/ridgecss",
+    "demo": "https://swlkr.com/ridgecss/",
+    "stars": 154,
+    "version": "v0.2.0",
+    "file": "css/ridge.min.css",
+    "bytes": 19969,
+    "downloaded": true,
+    "upstream": {
+      "repo": "swlkr/ridgecss",
+      "ref": "0.2.0",
+      "tag": "0.2.0",
+      "commit": "e8f42d407bcccb9135781716da3c5031f1df45f9",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "sakura",
+    "title": "sakura",
+    "kind": "classless",
+    "homepage": "https://github.com/oxalorg/sakura",
+    "demo": "https://oxal.org/projects/sakura/demo/",
+    "stars": 4393,
+    "version": "v1.5.1",
+    "file": "css/sakura.min.css",
+    "bytes": 3074,
+    "downloaded": true,
+    "upstream": {
+      "repo": "oxalorg/sakura",
+      "ref": "1.5.1",
+      "tag": "1.5.1",
+      "commit": "8d3f5f0e182da2707e1d95c5922da58133bb4106",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "sasszero",
+    "title": "SASS-ZERO (Breadboard)",
+    "kind": "class-light",
+    "homepage": "https://github.com/lazaronixon/sass-zero",
+    "demo": "",
+    "stars": 39,
+    "version": "v1.5.5",
+    "file": "css/sasszero.min.css",
+    "bytes": 12913,
+    "downloaded": true,
+    "upstream": {
+      "repo": "lazaronixon/sass-zero",
+      "ref": "v1.5.5",
+      "tag": "v1.5.5",
+      "commit": "eb07a8ea01660881c7c3a7fe8825e59eee8fb4b1",
+      "minified": "esbuild"
+    },
+    "note": "官方仓库只有 SCSS，按 README 的 base → utilities → breadboard 顺序用 dart-sass 编译"
+  },
+  {
+    "slug": "shadcn",
+    "title": "shadcn-classless (Nandaleio)",
+    "kind": "classless",
+    "homepage": "https://github.com/Nandaleio/shadcn-classless",
+    "demo": "https://nandaleio.github.io/shadcn-classless/",
+    "stars": 8,
+    "version": "main@b3f94b5",
+    "file": "css/shadcn.min.css",
+    "bytes": 20650,
+    "downloaded": true,
+    "upstream": {
+      "repo": "Nandaleio/shadcn-classless",
+      "ref": "main",
+      "tag": null,
+      "commit": "b3f94b5772db8fec81aa5389520a0a3bc7342a91",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "simple",
+    "title": "Simple.css",
+    "kind": "classless",
+    "homepage": "https://github.com/kevquirk/simple.css",
+    "demo": "https://simplecss.org/demo",
+    "stars": 5020,
+    "version": "v2.3.7",
+    "file": "css/simple.min.css",
+    "bytes": 9429,
+    "downloaded": true,
+    "upstream": {
+      "repo": "kevquirk/simple.css",
+      "ref": "v2.3.7",
+      "tag": "v2.3.7",
+      "commit": "7a0baa8906b3f76f58e14c6e496dd832b20ed946",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "spcss",
+    "title": "SPCSS",
+    "kind": "classless",
+    "homepage": "https://github.com/susam/spcss",
+    "demo": "https://susam.github.io/spcss/",
+    "stars": 970,
+    "version": "main@ebb5197",
+    "file": "css/spcss.min.css",
+    "bytes": 1369,
+    "downloaded": true,
+    "upstream": {
+      "repo": "susam/spcss",
+      "ref": "main",
+      "tag": null,
+      "commit": "ebb519784ea94c5e3ebf7669c48c1d813b7b8b53",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "stylecss",
+    "title": "style.css",
+    "kind": "classless",
+    "homepage": "https://github.com/ungoldman/style.css",
+    "demo": "https://ungoldman.com/style.css/",
+    "stars": 81,
+    "version": "v2.0.0-0",
+    "file": "css/stylecss.min.css",
+    "bytes": 7209,
+    "downloaded": true,
+    "upstream": {
+      "repo": "ungoldman/style.css",
+      "ref": "v2.0.0-0",
+      "tag": "v2.0.0-0",
+      "commit": "53915367811931058ba078491f29b0cc58860dcc",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "stylize",
+    "title": "Stylize.css",
+    "kind": "classless",
+    "homepage": "https://github.com/gadenbuie/stylize.css",
+    "demo": "https://vasanthv.github.io/stylize.css/demo.html",
+    "stars": 0,
+    "version": "v1.0.1",
+    "file": "css/stylize.min.css",
+    "bytes": 4812,
+    "downloaded": true,
+    "upstream": {
+      "repo": "vasanthv/stylize.css",
+      "ref": null,
+      "tag": null,
+      "commit": null,
+      "minified": null
+    },
+    "note": "原仓库 vasanthv/stylize.css 已删除，取自最后公开的 GitHub fork（stylize.min.css 原文件）"
+  },
+  {
+    "slug": "sumi",
+    "title": "Sumi.css",
+    "kind": "extra",
+    "homepage": "https://github.com/vladocar/Sumi.css",
+    "demo": "",
+    "stars": 190,
+    "version": "main@d823a5f",
+    "file": "css/sumi.min.css",
+    "bytes": 28245,
+    "downloaded": true,
+    "upstream": {
+      "repo": "vladocar/Sumi.css",
+      "ref": "main",
+      "tag": null,
+      "commit": "d823a5fcf09f11a62f4c585a03b82a3499a36f68",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "tacit",
+    "title": "tacit",
+    "kind": "classless",
+    "homepage": "https://github.com/yegor256/tacit",
+    "demo": "https://yegor256.github.io/tacit/",
+    "stars": 1879,
+    "version": "v1.9.7",
+    "file": "css/tacit.min.css",
+    "bytes": 6557,
+    "downloaded": true,
+    "upstream": {
+      "repo": "yegor256/tacit",
+      "ref": "1.9.7",
+      "tag": "1.9.7",
+      "commit": "03ce460ee51b228f5de97506865eb673450a220a",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "tinycss",
+    "title": "Tiny.css",
+    "kind": "classless",
+    "homepage": "https://github.com/ihsan6133/tiny.css",
+    "demo": "https://ihsan6133.github.io/tinycss",
+    "stars": 46,
+    "version": "main@27b0410",
+    "file": "css/tinycss.min.css",
+    "bytes": 5281,
+    "downloaded": true,
+    "upstream": {
+      "repo": "ihsan6133/tiny.css",
+      "ref": "main",
+      "tag": null,
+      "commit": "27b0410278280efb21902691130b78188797d710",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "ttycss",
+    "title": "tty.css",
+    "kind": "classless",
+    "homepage": "https://github.com/piranna/tty.css",
+    "demo": "https://piranna.github.io/tty.css/",
+    "stars": 10,
+    "version": "master@d35d0dc",
+    "file": "css/ttycss.min.css",
+    "bytes": 4478,
+    "downloaded": true,
+    "upstream": {
+      "repo": "piranna/tty.css",
+      "ref": "master",
+      "tag": null,
+      "commit": "d35d0dc86e28ca7df68bf379bedeec24125f4d18",
+      "minified": "esbuild"
+    },
+    "note": ""
+  },
+  {
+    "slug": "tufte",
+    "title": "Tufte CSS",
+    "kind": "classless",
+    "homepage": "https://github.com/edwardtufte/tufte-css",
+    "demo": "https://edwardtufte.github.io/tufte-css/",
+    "stars": 6585,
+    "version": "gh-pages@b5d7b7b",
+    "file": "css/tufte.min.css",
+    "bytes": 6946,
+    "downloaded": true,
+    "upstream": {
+      "repo": "edwardtufte/tufte-css",
+      "ref": "gh-pages",
+      "tag": null,
+      "commit": "b5d7b7bbe5ce9c4c50fcfad4f19ee3646cfd7ae1",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "w3ccore",
+    "title": "W3C Core Styles",
+    "kind": "classless",
+    "homepage": "https://www.w3.org/StyleSheets/Core/Overview",
+    "demo": "https://www.w3.org/StyleSheets/Core/preview",
+    "stars": 0,
+    "version": "1998",
+    "file": "css/w3ccore.min.css",
+    "bytes": 9369,
+    "downloaded": true,
+    "upstream": {
+      "repo": "",
+      "ref": null,
+      "tag": null,
+      "commit": null,
+      "minified": "esbuild"
+    },
+    "note": "W3C Core Styles 无 .min 构建，取官方 Swiss 主题并由本地 esbuild 压缩"
+  },
+  {
+    "slug": "water",
+    "title": "water.css",
+    "kind": "classless",
+    "homepage": "https://github.com/kognise/water.css",
+    "demo": "https://kognise.github.io/water.css/",
+    "stars": 8655,
+    "version": "master@d950cbc",
+    "file": "css/water.min.css",
+    "bytes": 22668,
+    "downloaded": true,
+    "upstream": {
+      "repo": "kognise/water.css",
+      "ref": "master",
+      "tag": null,
+      "commit": "d950cbc9f8607521587fae1aa523f85e25f8396f",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "wing",
+    "title": "Wing",
+    "kind": "class-light",
+    "homepage": "https://github.com/kbrsh/wing",
+    "demo": "https://kbrsh.github.io/wing/",
+    "stars": 1991,
+    "version": "master@5792c1c",
+    "file": "css/wing.min.css",
+    "bytes": 5978,
+    "downloaded": true,
+    "upstream": {
+      "repo": "kbrsh/wing",
+      "ref": "master",
+      "tag": null,
+      "commit": "5792c1cf1a5c5a22bba39b4272429e0ce55953ba",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "writ",
+    "title": "Writ",
+    "kind": "classless",
+    "homepage": "https://github.com/programble/writ",
+    "demo": "https://writ.cmcenroe.me/",
+    "stars": 466,
+    "version": "v1.0.4",
+    "file": "css/writ.min.css",
+    "bytes": 2228,
+    "downloaded": true,
+    "upstream": {
+      "repo": "programble/writ",
+      "ref": "v1.0.4",
+      "tag": "v1.0.4",
+      "commit": "014a4890e2acf539b2bf6b13b885d546d92a56d0",
+      "minified": null
+    },
+    "note": ""
+  },
+  {
+    "slug": "yorha",
+    "title": "YoRHa",
+    "kind": "classless",
+    "homepage": "https://github.com/metakirby5/yorha",
+    "demo": "https://metakirby5.github.io/yorha/",
+    "stars": 330,
+    "version": "master@b575933",
+    "file": "css/yorha.min.css",
+    "bytes": 7939,
+    "downloaded": true,
+    "upstream": {
+      "repo": "metakirby5/yorha",
+      "ref": "master",
+      "tag": null,
+      "commit": "b575933c8a8d037bbdf04aec1cd197ce9e729843",
+      "minified": null
+    },
+    "note": ""
+  }
+]

@@ -10,35 +10,21 @@ body {
 
 div {
     align-items: center;
-    margin: 4px 0;
+    margin: 2px 0;
     z-index: 1;
 }
 
-input:not([type="checkbox"], [type="radio"]),
-select:not([multiple], [size]),
-textarea {
-    box-sizing: border-box;
-    inline-size: 100%;
-    min-block-size: 56px;
-    padding: 16px;
-    border: 0;
-    border-block-end: 1px solid var(--mc);
-    border-radius: 4px 4px 0 0;
+input:not([type="checkbox"], [type="radio"]) {
+    width: 100%;
+    padding: 2px;
+    border: none;
+    border-bottom: 1px solid var(--mc);
     background-color: transparent;
-    font-family: inherit;
-    font-size: 1rem;
-    color: light-dark(#000, #e0e3e7);
     outline: none;
 }
 
-select:not([multiple], [size]) {
-    padding-inline-end: 56px;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
-    background-position: right 16px center;
-    background-size: 18px 18px;
-    background-repeat: no-repeat;
-    appearance: none;
-    -webkit-appearance: none;
+textarea {
+    background-color: transparent;
 }
 
 input:disabled {
@@ -48,31 +34,22 @@ input:disabled {
 input:disabled,
 select:disabled,
 textarea:disabled {
-    opacity: 0.38;
+    opacity: 0.5;
 }
 
 input[type="checkbox"]:not([role="switch"]) {
-    inline-size: 18px;
-    block-size: 18px;
-    margin: 0;
-    vertical-align: middle;
-}
-
-input[type="radio"] {
-    inline-size: 20px;
-    block-size: 20px;
+    width: 20px;
+    height: 20px;
     margin: 0;
     vertical-align: middle;
 }
 
 input[type="color"] {
-    inline-size: 60px;
-    block-size: 32px;
-    min-block-size: 0;
+    width: 60px;
+    height: 30px;
     margin: 0;
     padding: 0;
     border: 0;
-    border-radius: 4px;
     background: none;
     appearance: none;
     -webkit-appearance: none;
@@ -84,14 +61,19 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 
 input[type="color"]::-webkit-color-swatch {
     border: 0;
-    border-radius: inherit;
+    border-radius: 0;
+}
+
+input[type="color"]:focus-visible {
+    outline: 2px solid var(--mc);
+    outline-offset: 2px;
 }
 
 input[type="range"] {
     appearance: none;
     -webkit-appearance: none;
-    inline-size: 100%;
-    block-size: 44px;
+    width: 100%;
+    height: 30px;
     margin: 0;
     padding: 0;
     border: 0;
@@ -99,25 +81,40 @@ input[type="range"] {
 }
 
 input[type="range"]::-webkit-slider-runnable-track {
-    block-size: 4px;
-    border-radius: 2px;
+    height: 6px;
+    border-radius: 3px;
     background: #ccc;
 }
 
 input[type="range"]::-webkit-slider-thumb {
     appearance: none;
     -webkit-appearance: none;
-    inline-size: 20px;
-    block-size: 20px;
-    margin-block-start: -8px;
+    width: 16px;
+    height: 16px;
+    margin-block-start: -5px;
     border-radius: 50%;
     background: var(--mc);
 }
 
-input[type="color"]:focus-visible,
 input[type="range"]:focus-visible {
     outline: 2px solid var(--mc);
     outline-offset: 2px;
+}
+
+select:not([multiple], [size]) {
+    width: 100%;
+    padding: 2px;
+    padding-inline-end: 22px;
+    border: 0;
+    border-bottom: 1px solid var(--mc);
+    outline: none;
+    background-color: transparent;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.5 4.5 6 8l3.5-3.5'/%3E%3C/svg%3E");
+    background-position: right 6px center;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
 input,
@@ -127,21 +124,21 @@ button {
     font-family: inherit;
 }
 
+input,
+select,
+textarea {
+    font-size: 1rem;
+    color: light-dark(#000, #e0e3e7);
+}
+
 button {
-    box-sizing: border-box;
-    inline-size: 100%;
-    min-block-size: 40px;
-    margin: 8px 0;
-    padding: 0 24px;
     border: 0;
-    border-radius: 20px;
     background: var(--mc);
     color: #fff;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: .1px;
-    line-height: 40px;
-    cursor: pointer;
+    line-height: 2.4rem;
+    font-size: 1.2rem;
+    width: 100%;
+    margin: 4px 0;
 }
 
 input[type="checkbox"][role="switch"] {
@@ -152,41 +149,33 @@ input[type="checkbox"][role="switch"] {
     vertical-align: middle;
     flex: none;
     box-sizing: border-box;
-    inline-size: 52px;
-    block-size: 32px;
+    width: 60px;
+    height: 30px;
     margin: 0;
     padding: 0;
-    border: 2px solid #79747e;
-    border-radius: 16px;
-    background: transparent;
+    border: 0;
+    border-radius: 50px;
+    background: #ccc;
     cursor: pointer;
-    transition: background-color .2s, border-color .2s;
+}
+
+input[type="checkbox"][role="switch"]:checked {
+    background: var(--mc);
 }
 
 input[type="checkbox"][role="switch"]::before {
     content: "";
     position: absolute;
-    inset-block-start: 6px;
-    inset-inline-start: 6px;
+    inset: 0 50% 0 0;
     box-sizing: border-box;
-    inline-size: 16px;
-    block-size: 16px;
-    border-radius: 50%;
-    background: #79747e;
-    transition: inset-inline-start .2s, inset-block-start .2s, inline-size .2s, block-size .2s;
-}
-
-input[type="checkbox"][role="switch"]:checked {
-    border-color: var(--mc);
-    background: var(--mc);
+    background: #fff;
+    border: 3px solid #ccc;
+    border-radius: 50px;
 }
 
 input[type="checkbox"][role="switch"]:checked::before {
-    inset-block-start: 2px;
-    inset-inline-start: 22px;
-    inline-size: 24px;
-    block-size: 24px;
-    background: #fff;
+    transform: translateX(100%);
+    border-color: var(--mc);
 }
 
 input[type="checkbox"][role="switch"]:focus-visible {
@@ -194,11 +183,70 @@ input[type="checkbox"][role="switch"]:focus-visible {
     outline-offset: 2px;
 }
 
-button:disabled {
-    opacity: 0.38;
+.seg {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    align-items: stretch;
+    inline-size: 100%;
+    height: 30px;
+    margin: 0;
+    border-radius: 50px;
+    overflow: hidden;
+    background: #ccc;
+    vertical-align: middle;
 }
 
-.seg,
+.seg label {
+    position: relative;
+    display: flex;
+    min-width: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.seg input {
+    display: none;
+}
+
+.seg label > span {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    font-size: 13px;
+    line-height: 1;
+    color: #555;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seg label:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.5);
+    pointer-events: none;
+}
+
+.seg label:has(> input:checked):not(:has(+ label > input:checked))::after {
+    display: none;
+}
+
+.seg label:has(+ label > input:checked):not(:has(> input:checked))::after {
+    display: none;
+}
+
+.seg input:checked + span {
+    background: var(--mc);
+    color: #fff;
+}
+
 [role="group"]:has(> label > input[type="checkbox"]) {
     display: grid;
     grid-auto-flow: column;
@@ -206,21 +254,23 @@ button:disabled {
     align-items: stretch;
     gap: 0;
     inline-size: 100%;
-    block-size: 40px;
+    height: 30px;
     margin: 0;
-    border-radius: 20px;
+    border-radius: 50px;
     overflow: hidden;
     background: #ccc;
     vertical-align: middle;
 }
 
-.seg>label,
-[role="group"]:has(> label > input[type="checkbox"])>label {
+[role="group"]:has(> label > input[type="checkbox"]) > label {
     position: relative;
     display: flex;
+    align-items: center;
+    justify-content: center;
     min-inline-size: 0;
     margin: 0;
-    font-size: 14px;
+    padding: 0 4px;
+    font-size: 13px;
     line-height: 1;
     color: #555;
     white-space: nowrap;
@@ -229,43 +279,30 @@ button:disabled {
     cursor: pointer;
 }
 
-.seg>label>span,
-[role="group"]:has(> label > input[type="checkbox"])>label {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 12px;
-}
-
-.seg input,
-[role="group"]:has(> label > input[type="checkbox"])>label>input {
+[role="group"]:has(> label > input[type="checkbox"]) > label > input {
     display: none;
 }
 
-.seg>label:not(:last-child)::after,
-[role="group"]:has(> label > input[type="checkbox"])>label:not(:last-child)::after {
+[role="group"]:has(> label > input[type="checkbox"]) > label:not(:last-child)::after {
     content: "";
     position: absolute;
-    inset-block: 0;
-    inset-inline-end: 0;
-    inline-size: 1px;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
     background: rgba(255, 255, 255, 0.5);
     pointer-events: none;
 }
 
-.seg>label:has(> input:checked):not(:has(+ label>input:checked))::after,
-[role="group"]:has(> label > input[type="checkbox"])>label:has(> input:checked):not(:has(+ label>input:checked))::after {
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked):not(:has(+ label > input:checked))::after {
     display: none;
 }
 
-.seg>label:has(+ label>input:checked):not(:has(> input:checked))::after,
-[role="group"]:has(> label > input[type="checkbox"])>label:has(+ label>input:checked):not(:has(> input:checked))::after {
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(+ label > input:checked):not(:has(> input:checked))::after {
     display: none;
 }
 
-.seg input:checked+span,
-[role="group"]:has(> label > input[type="checkbox"])>label:has(> input:checked) {
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked) {
     background: var(--mc);
     color: #fff;
 }

@@ -1,0 +1,7 @@
+# scratch space used by tools/collect.py and tools/build.py
+.tmp/
+test-menu.html
+
+node_modules/
+
+__pycache__/

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -493,361 +493,468 @@
   </nav>
 
   <main class="demo-main">
+      <section id="Table">
+        <h2>Table</h2>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Field</th>
+              <th scope="col">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Name</td>
+              <td>Ada Lovelace</td>
+            </tr>
+            <tr>
+              <td>Email</td>
+              <td>ada@example.com</td>
+            </tr>
+            <tr>
+              <td>Country</td>
+              <td>Japan</td>
+            </tr>
+            <tr>
+              <td>Language</td>
+              <td>English</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+          <!-- Preview -->
+      <!-- Typography-->
+      <section id="typography">
+        <h2>Typography</h2>
+        <p>
+          Aliquam lobortis vitae nibh nec rhoncus. Morbi mattis neque eget efficitur feugiat.
+          Vivamus porta nunc a erat mattis, mattis feugiat turpis pretium. Quisque sed tristique
+          felis.
+        </p>
 
-    <form id="settings" class="demo-form" autocomplete="on">
-      <div class="demo-field">
-        <label class="demo-label" for="name">Name</label>
-        <input type="text" id="name" name="name" value="Ada Lovelace" placeholder="Ada Lovelace" autocomplete="name"
-          required>
-      </div>
+        <!-- Blockquote-->
+        <blockquote>
+          "Maecenas vehicula metus tellus, vitae congue turpis hendrerit non. Nam at dui sit amet
+          ipsum cursus ornare."
+          <footer>
+            <cite>- Phasellus eget lacinia</cite>
+          </footer>
+        </blockquote>
 
-      <div class="demo-field">
-        <label class="demo-label" for="email">Email</label>
-        <input type="email" id="email" name="email" value="ada@example.com" placeholder="ada@example.com"
-          autocomplete="email" required>
-      </div>
+        <!-- Lists-->
+        <h3>Lists</h3>
+        <ul>
+          <li>Aliquam lobortis lacus eu libero ornare facilisis.</li>
+          <li>Nam et magna at libero scelerisque egestas.</li>
+          <li>Suspendisse id nisl ut leo finibus vehicula quis eu ex.</li>
+          <li>Proin ultricies turpis et volutpat vehicula.</li>
+        </ul>
 
-      <div class="demo-field">
-        <label class="demo-label" for="password">Password</label>
-        <input type="password" id="password" name="password" value="correct horse" minlength="8"
-          autocomplete="new-password">
-      </div>
+        <!-- Inline text elements-->
+        <h3>Inline text elements</h3>
+        <p><a href="#" onclick="event.preventDefault()">Link</a></p>
+        <p><strong>Bold</strong></p>
+        <p><em>Italic</em></p>
+        <p><u>Underline</u></p>
+        <p><del>Deleted</del></p>
+        <p><ins>Inserted</ins></p>
+        <p><s>Strikethrough</s></p>
+        <p><small>Small </small></p>
+        <p>Text <sub>Sub</sub></p>
+        <p>Text <sup>Sup</sup></p>
+        <p>
+          <abbr title="Abbreviation" data-tooltip="Abbreviation">Abbr.</abbr>
+        </p>
+        <p><kbd>Kbd</kbd></p>
+        <p><mark>Highlighted</mark></p>
 
-      <div class="demo-field">
-        <label class="demo-label" for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" placeholder="+1 555 0100" pattern="[0-9+\-\s]{7,20}"
-          autocomplete="tel">
-      </div>
+        <!-- Headings-->
+        <h3>Heading 3</h3>
+        <p>
+          Integer bibendum malesuada libero vel eleifend. Fusce iaculis turpis ipsum, at efficitur
+          sem scelerisque vel. Aliquam auctor diam ut purus cursus fringilla. Class aptent taciti
+          sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        </p>
+        <h4>Heading 4</h4>
+        <p>
+          Cras fermentum velit vitae auctor aliquet. Nunc non congue urna, at blandit nibh. Donec ac
+          fermentum felis. Vivamus tincidunt arcu ut lacus hendrerit, eget mattis dui finibus.
+        </p>
+        <h5>Heading 5</h5>
+        <p>
+          Donec nec egestas nulla. Sed varius placerat felis eu suscipit. Mauris maximus ante in
+          consequat luctus. Morbi euismod sagittis efficitur. Aenean non eros orci. Vivamus ut diam
+          sem.
+        </p>
+        <h6>Heading 6</h6>
+        <p>
+          Ut sed quam non mauris placerat consequat vitae id risus. Vestibulum tincidunt nulla ut
+          tortor posuere, vitae malesuada tortor molestie. Sed nec interdum dolor. Vestibulum id
+          auctor nisi, a efficitur sem. Aliquam sollicitudin efficitur turpis, sollicitudin
+          hendrerit ligula semper id. Nunc risus felis, egestas eu tristique eget, convallis in
+          velit.
+        </p>
 
-      <div class="demo-field">
-        <label class="demo-label" for="website">Website</label>
-        <input type="url" id="website" name="website" placeholder="https://example.com" autocomplete="url">
-      </div>
+        <!-- Medias-->
+        <figure>
+          <img
+            src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDEyMDAgNjAwIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjZGZlN2YwIi8+CjxjaXJjbGUgY3g9IjkzMCIgY3k9IjE1MCIgcj0iNzAiIGZpbGw9IiNmMmM5NGMiLz4KPHBhdGggZD0iTTAgNjAwIEwzODAgMjUwIEw3MDAgNTIwIEw5MDAgMzYwIEwxMjAwIDYwMFoiIGZpbGw9IiM4ZWE5YzEiLz4KPHBhdGggZD0iTTAgNjAwIEwzMDAgMzgwIEw1NjAgNTYwIEw3NjAgNDMwIEwxMjAwIDYwMFoiIGZpbGw9IiM1YzdmOWUiLz4KPC9zdmc+"
+            alt="Minimal landscape"
+          >
+          <figcaption>内联 SVG 占位图（离线可用）</figcaption>
+        </figure>
+      </section>
+      <!-- ./ Typography-->
 
-      <div class="demo-field">
-        <label class="demo-label" for="age">Age</label>
-        <input type="number" id="age" name="age" value="36" min="1" max="120" step="1">
-      </div>
+      <!-- Form elements-->
+      <section id="form">
+        <h2>Form Elements</h2>
+        <form id="settings" class="demo-form" autocomplete="on">
+          <div class="demo-field">
+            <label class="demo-label" for="name">Name</label>
+            <input type="text" id="name" name="name" value="Ada Lovelace" placeholder="Ada Lovelace" autocomplete="name"
+              required>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="email">Email</label>
+            <input type="email" id="email" name="email" value="ada@example.com" placeholder="ada@example.com"
+              autocomplete="email" required>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="password">Password</label>
+            <input type="password" id="password" name="password" value="correct horse" minlength="8"
+              autocomplete="new-password">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 555 0100" pattern="[0-9+\-\s]{7,20}" autocomplete="tel">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="website">Website</label>
+            <input type="url" id="website" name="website" placeholder="https://example.com" autocomplete="url">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="age">Age</label>
+            <input type="number" id="age" name="age" value="36" min="1" max="120" step="1">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="search">Search</label>
+            <input type="search" id="search" name="search" placeholder="Search settings…">
+          </div>
+          <div class="demo-field">
+            <label class="demo-label" for="birthday">Date</label>
+            <input type="date" id="birthday" name="birthday" value="1990-04-12">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="alarm">Time</label>
+            <input type="time" id="alarm" name="alarm" value="08:30">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="meeting">Date &amp; time</label>
+            <input type="datetime-local" id="meeting" name="meeting" value="2025-01-31T09:00">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="expiry">Month</label>
+            <input type="month" id="expiry" name="expiry" value="2027-06">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="sprint">Week</label>
+            <input type="week" id="sprint" name="sprint" value="2025-W05">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="country">Country</label>
+            <select id="country" name="country">
+              <option value="">Choose a country…</option>
+              <option value="de">Germany</option>
+              <option value="fr">France</option>
+              <option value="jp" selected>Japan</option>
+              <option value="nl">Netherlands</option>
+              <option value="us">United States</option>
+            </select>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="tz">Time zone</label>
+            <select id="tz" name="tz">
+              <optgroup label="Europe">
+                <option value="cet" selected>Berlin (CET)</option>
+                <option value="gmt">London (GMT)</option>
+              </optgroup>
+              <optgroup label="Asia">
+                <option value="jst">Tokyo (JST)</option>
+                <option value="cst">Shanghai (CST)</option>
+              </optgroup>
+            </select>
+          </div>
+      
+          <div class="demo-field">
+            <span class="demo-label" id="gender-label">Gender</span>
+            <!-- role="radiogroup" (not "group"): it IS a radio group, and several
+                   frameworks style [role="group"] as a joined inline-flex row, which
+                   can no longer fit — and then pushed a horizontal scrollbar. -->
+            <div class="seg" role="group" aria-labelledby="gender-label">
+              <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
+              <label><input type="radio" name="gender" value="m"><span>Male</span></label>
+              <label><input type="radio" name="gender" value="x"><span>None</span></label>
+            </div>
+          </div>
+      
+          <div class="demo-field">
+            <span class="demo-label" id="interests-label">Interests</span>
+            <div class="demo-choices" role="group" aria-labelledby="interests-label">
+              <label><input type="checkbox" name="interests" value="design" checked> Design</label>
+              <label><input type="checkbox" name="interests" value="code" checked> Code</label>
+              <label><input type="checkbox" name="interests" value="a11y" checked> Paint</label>
+            </div>
+          </div>
+      
+          <div class="demo-field">
+            <span class="demo-label">Terms</span>
+            <div class="demo-choices">
+              <label><input type="checkbox" name="terms" value="yes" required checked> I accept the terms and
+                conditions</label>
+            </div>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="notify">Notifications</label>
+            <div class="demo-choices">
+              <label><input type="checkbox" id="notify" name="notify" value="on" role="switch" checked> Email me about
+                updates</label>
+            </div>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="avatar">Avatar</label>
+            <input type="file" id="avatar" name="avatar" accept="image/*">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="docs">Attachments</label>
+            <input type="file" id="docs" name="docs" multiple>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="accent">Accent</label>
+            <input type="color" id="accent" name="accent" value="#2196F3">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="volume">Volume</label>
+            <input type="range" id="volume" name="volume" min="0" max="100" step="5" value="70">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="editor">Editor</label>
+            <input type="text" id="editor" name="editor" list="editors" placeholder="Pick or type an editor…">
+            <datalist id="editors">
+              <option value="Neovim"></option>
+              <option value="VS Code"></option>
+              <option value="Zed"></option>
+              <option value="Emacs"></option>
+            </datalist>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="bio">Bio</label>
+            <textarea id="bio" name="bio" rows="4" placeholder="A few words about yourself…">CSS enthusiast.</textarea>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="username">Username</label>
+            <input type="text" id="username" name="username" value="ada_l" placeholder="3–12 lowercase letters, digits or _"
+              pattern="[a-z0-9_]{3,12}" required>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="readonly">Read only</label>
+            <input type="text" id="readonly" name="readonly" value="ada@example.com" readonly>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="disabled">Disabled</label>
+            <input type="text" id="disabled" name="disabled" value="Cannot be edited" disabled>
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label" for="notes">Notes</label>
+            <textarea id="notes" name="notes" rows="2" disabled>This textarea is disabled.</textarea>
+          </div>
+      
+          <div class="demo-actions">
+            <button type="submit">Save changes</button>
+            <button type="reset">Reset</button>
+            <button type="button" disabled>Unavailable</button>
+          </div>
+      
+          <output class="demo-result" id="result" for="name email phone" aria-live="polite"></output>
+        </form>
+      </section>
+      <!-- ./ Form elements-->
 
-      <div class="demo-field">
-        <label class="demo-label" for="search">Search</label>
-        <input type="search" id="search" name="search" placeholder="Search settings…">
-      </div>
-      <div class="demo-field">
-        <label class="demo-label" for="birthday">Date</label>
-        <input type="date" id="birthday" name="birthday" value="1990-04-12">
-      </div>
+      <!-- Modal -->
+      <section id="modal">
+        <h2>Modal</h2>
+        <button class="contrast" onclick="modalExample.showModal()">Launch demo modal</button>
+        <dialog id="modalExample">
+          <p><strong>Example modal</strong></p>
+          <p>A <code>&lt;dialog&gt;</code> element, left unstyled so each framework renders it itself.</p>
+          <form method="dialog">
+            <button>Close</button>
+          </form>
+        </dialog>
+      </section>
+      <!-- ./ Modal -->
 
-      <div class="demo-field">
-        <label class="demo-label" for="alarm">Time</label>
-        <input type="time" id="alarm" name="alarm" value="08:30">
-      </div>
+      <!-- Accordions -->
+      <section id="accordions">
+        <h2>Accordions</h2>
+        <details>
+          <summary>Accordion 1</summary>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque urna diam,
+            tincidunt nec porta sed, auctor id velit. Etiam venenatis nisl ut orci consequat, vitae
+            tempus quam commodo. Nulla non mauris ipsum. Aliquam eu posuere orci. Nulla convallis
+            lectus rutrum quam hendrerit, in facilisis elit sollicitudin. Mauris pulvinar pulvinar
+            mi, dictum tristique elit auctor quis. Maecenas ac ipsum ultrices, porta turpis sit
+            amet, congue turpis.
+          </p>
+        </details>
+        <details open>
+          <summary>Accordion 2</summary>
+          <ul>
+            <li>Vestibulum id elit quis massa interdum sodales.</li>
+            <li>Nunc quis eros vel odio pretium tincidunt nec quis neque.</li>
+            <li>Quisque sed eros non eros ornare elementum.</li>
+            <li>Cras sed libero aliquet, porta dolor quis, dapibus ipsum.</li>
+          </ul>
+        </details>
+      </section>
+      <!-- ./ Accordions -->
 
-      <div class="demo-field">
-        <label class="demo-label" for="meeting">Date &amp; time</label>
-        <input type="datetime-local" id="meeting" name="meeting" value="2025-01-31T09:00">
-      </div>
+      <!-- Article-->
+      <article id="article">
+        <h2>Article</h2>
+        <p>
+          Nullam dui arcu, malesuada et sodales eu, efficitur vitae dolor. Sed ultricies dolor non
+          ante vulputate hendrerit. Vivamus sit amet suscipit sapien. Nulla iaculis eros a elit
+          pharetra egestas. Nunc placerat facilisis cursus. Sed vestibulum metus eget dolor pharetra
+          rutrum.
+        </p>
+        <footer>
+          <small>Duis nec elit placerat, suscipit nibh quis, finibus neque.</small>
+        </footer>
+      </article>
+      <!-- ./ Article-->
 
-      <div class="demo-field">
-        <label class="demo-label" for="expiry">Month</label>
-        <input type="month" id="expiry" name="expiry" value="2027-06">
-      </div>
+      <!-- Group -->
+      <section id="group">
+        <h2>Group</h2>
+        <form>
+          <fieldset role="group">
+            <input name="email" type="email" placeholder="Enter your email" autocomplete="email">
+            <input type="submit" value="Subscribe">
+          </fieldset>
+        </form>
+      </section>
+      <!-- ./ Group -->
 
-      <div class="demo-field">
-        <label class="demo-label" for="sprint">Week</label>
-        <input type="week" id="sprint" name="sprint" value="2025-W05">
-      </div>
+      <!-- Progress -->
+      <section id="progress">
+        <h2>Progress bar</h2>
+        <progress id="progress-1" value="25" max="100"></progress>
+        <progress id="progress-2"></progress>
+      </section>
+      <!-- ./ Progress -->
 
-      <div class="demo-field">
-        <label class="demo-label" for="country">Country</label>
-        <select id="country" name="country">
-          <option value="">Choose a country…</option>
-          <option value="de">Germany</option>
-          <option value="fr">France</option>
-          <option value="jp" selected>Japan</option>
-          <option value="nl">Netherlands</option>
-          <option value="us">United States</option>
-        </select>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="tz">Time zone</label>
-        <select id="tz" name="tz">
-          <optgroup label="Europe">
-            <option value="cet" selected>Berlin (CET)</option>
-            <option value="gmt">London (GMT)</option>
-          </optgroup>
-          <optgroup label="Asia">
-            <option value="jst">Tokyo (JST)</option>
-            <option value="cst">Shanghai (CST)</option>
-          </optgroup>
-        </select>
-      </div>
-
-      <div class="demo-field">
-        <span class="demo-label" id="gender-label">Gender</span>
-        <!-- role="radiogroup" (not "group"): it IS a radio group, and several
-             frameworks style [role="group"] as a joined inline-flex row, which
-             can no longer fit — and then pushed a horizontal scrollbar. -->
-        <div class="seg" role="radiogroup" aria-labelledby="gender-label">
-          <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
-          <label><input type="radio" name="gender" value="m"><span>Male</span></label>
-          <label><input type="radio" name="gender" value="x"><span>None</span></label>
-        </div>
-      </div>
-
-      <div class="demo-field">
-        <span class="demo-label" id="interests-label">Interests</span>
-        <div class="demo-choices" role="group" aria-labelledby="interests-label">
-          <label><input type="checkbox" name="interests" value="design" checked> Design</label>
-          <label><input type="checkbox" name="interests" value="code" checked> Code</label>
-          <label><input type="checkbox" name="interests" value="a11y" checked> Paint</label>
-        </div>
-      </div>
-
-      <div class="demo-field">
-        <span class="demo-label">Terms</span>
-        <div class="demo-choices">
-          <label><input type="checkbox" name="terms" value="yes" required checked> I accept the terms and
-            conditions</label>
-        </div>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="notify">Notifications</label>
-        <div class="demo-choices">
-          <label><input type="checkbox" id="notify" name="notify" value="on" role="switch" checked> Email me about
-            updates</label>
-        </div>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="avatar">Avatar</label>
-        <input type="file" id="avatar" name="avatar" accept="image/*">
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="docs">Attachments</label>
-        <input type="file" id="docs" name="docs" multiple>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="accent">Accent</label>
-        <input type="color" id="accent" name="accent" value="#2196F3">
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="volume">Volume</label>
-        <input type="range" id="volume" name="volume" min="0" max="100" step="5" value="70">
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="editor">Editor</label>
-        <input type="text" id="editor" name="editor" list="editors" placeholder="Pick or type an editor…">
-        <datalist id="editors">
-          <option value="Neovim"></option>
-          <option value="VS Code"></option>
-          <option value="Zed"></option>
-          <option value="Emacs"></option>
-        </datalist>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="bio">Bio</label>
-        <textarea id="bio" name="bio" rows="4" placeholder="A few words about yourself…">CSS enthusiast.</textarea>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="username">Username</label>
-        <input type="text" id="username" name="username" value="ada_l" placeholder="3–12 lowercase letters, digits or _"
-          pattern="[a-z0-9_]{3,12}" required>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="readonly">Read only</label>
-        <input type="text" id="readonly" name="readonly" value="ada@example.com" readonly>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="disabled">Disabled</label>
-        <input type="text" id="disabled" name="disabled" value="Cannot be edited" disabled>
-      </div>
-
-      <div class="demo-field">
-        <label class="demo-label" for="notes">Notes</label>
-        <textarea id="notes" name="notes" rows="2" disabled>This textarea is disabled.</textarea>
-      </div>
-
-      <div class="demo-actions">
-        <button type="submit">Save changes</button>
-        <button type="reset">Reset</button>
-        <button type="button" disabled>Unavailable</button>
-      </div>
-
-      <output class="demo-result" id="result" for="name email phone" aria-live="polite"></output>
-    </form>
-
-    <table>
-      <caption>Table test — 2 columns &times; 4 rows</caption>
-      <thead>
-        <tr>
-          <th scope="col">Field</th>
-          <th scope="col">Value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Name</td>
-          <td>Ada Lovelace</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>ada@example.com</td>
-        </tr>
-        <tr>
-          <td>Country</td>
-          <td>Japan</td>
-        </tr>
-        <tr>
-          <td>Language</td>
-          <td>English</td>
-        </tr>
-      </tbody>
-    </table>
+      <!-- Loading -->
+      <section id="loading">
+        <h2>Loading</h2>
+        <article aria-busy="true"></article>
+        <button aria-busy="true">Please wait…</button>
+      </section>
   </main>
 
   <script>
-    // Load order matters for Fylgja: tokens -> base -> theme -> form -> utilities.
-    // 全部走 CDN（jsDelivr，版本锁定）。raw.githubusercontent.com 返回
-    // text/plain，浏览器会以 MIME 不符拒绝应用样式表，所以 GitHub 源码用
-    // jsDelivr 的 gh 通道代替官方直链/官网直链。
+    // 数据由 tools/gen.py 生成：每个框架都是
+    //   [本地样式表, GitHub 星数, 版本, 文件字节数]
+    // 样式表已全部下载到 css/，运行时只读本地文件，不请求任何 CDN。
 const frameworks = {
-  // ===== 原有配置（未改动） =====
-  pico: [
-    'https://cdn.jsdelivr.net/npm/@picocss/pico@2.1.1/css/pico.classless.min.css'
-  ],
-  sumi: [
-    'https://cdn.jsdelivr.net/gh/vladocar/Sumi.css@d823a5fcf09f11a62f4c585a03b82a3499a36f68/sumi.min.css'
-  ],
-  missing: [
-    'https://cdn.jsdelivr.net/npm/missing.css@1.3.0/dist/missing.min.css'
-  ],
-  fylgja: [
-    'https://cdn.jsdelivr.net/npm/@fylgja/tokens@2.2.1/css/index.min.css',
-    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/index.min.css',
-    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/theme.css',
-    'https://cdn.jsdelivr.net/npm/@fylgja/base@2.1.6/form-class-less.css',
-    'https://cdn.jsdelivr.net/npm/@fylgja/utilities@2.1.4/index.min.css'
-  ],
-  materia: ['css/materia.css'],
-  pure: ['css/pure.classless.css'],
-
-  // ===== 以下为新增的 Classless CSS 项目 =====
-  almond: [
-    'https://cdn.jsdelivr.net/gh/alvaromontoro/almond.css@latest/dist/almond.min.css'
-  ],
-  attricss: [
-    'https://cdn.jsdelivr.net/gh/raj457036/attriCSS@master/attriCSS.min.css'
-  ],
-  awsm: [
-    'https://unpkg.com/awsm.css/dist/awsm.min.css'
-  ],
-  axist: [
-    'https://unpkg.com/axist@latest/dist/axist.min.css'
-  ],
-  bahunya: [
-    'https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css'
-  ],
-  bamboo: [
-    'https://unpkg.com/bamboo.css'
-  ],
-  barecss: [
-    'https://cdn.jsdelivr.net/npm/bare-css@2.0.3/css/bare.min.css'
-  ],
-  basiccss: [
-    'https://cdn.jsdelivr.net/npm/@vladocar/basic.css/css/basic.css'
-  ],
-  bolt: [
-    'https://unpkg.com/boltcss/bolt.min.css'
-  ],
-  blades: [
-    'https://cdn.jsdelivr.net/npm/@anyblades/blades@3/css/blades.min.css'
-  ],
-  bullframe: [
-    'https://cdn.jsdelivr.net/npm/bullframe.css@6/dist/css/bullframe-system-default.min.css'
-  ],
-  chimeracss: [
-    'https://cdn.jsdelivr.net/npm/chimeracss@1.6.2/build/chimera.min.css'
-  ],
-  classlesscss: [
-    'https://cdn.jsdelivr.net/gh/digitallytailored/classless@latest/classless.min.css'
-  ],
-  concrete: [
-    'https://cdnjs.cloudflare.com/ajax/libs/concrete.css/3.0.0/concrete.min.css'
-  ],
-  devcss: [
-    'https://cdn.jsdelivr.net/npm/@intergrav/dev.css@5'
-  ],
-  holiday: [
-    'https://cdn.jsdelivr.net/npm/holiday.css@0.11.2/holiday.css'
-  ],
-  latex: [
-    'https://unpkg.com/latex.css/style.min.css'
-  ],
-  magick: [
-    'https://unpkg.com/magick.css'
-  ],
-  markdownair: [
-    'https://cdn.jsdelivr.net/npm/markdown-air@0.0.4/css/air.min.css'
-  ],
-  marx: [
-    'https://cdn.jsdelivr.net/npm/marx-css@5/css/marx.min.css'
-  ],
-  mercury: [
-    'https://cdn.jsdelivr.net/npm/mercury-css@1.0.0/dist/mercury.min.css'
-  ],
-  mvp: [
-    'https://unpkg.com/mvp.css'
-  ],
-  newcss: [
-    'https://cdn.jsdelivr.net/npm/@exampledev/new.css@1.1.2/new.min.css'
-  ],
-  nimble: [
-    'https://cdn.jsdelivr.net/npm/@leftium/nimble.css/dist/nimble.min.css'
-  ],
-  ridge: [
-    'https://cdn.jsdelivr.net/gh/swlkr/ridgecss@master/ridge.css'
-  ],
-  sakura: [
-    'https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css'
-  ],
-  shadcnclassless: [
-    'https://cdn.jsdelivr.net/gh/fordus/shadcn-classless@main/dist/shadcn-classless.css'
-  ],
-  simple: [
-    'https://cdn.simplecss.org/simple.min.css'
-  ],
-  spcss: [
-    'https://cdn.jsdelivr.net/npm/spcss@0.9.0'
-  ],
-  stylize: [
-    'https://cdn.jsdelivr.net/gh/vasanthv/stylize.css@master/stylize.css'
-  ],
-  tacit: [
-    'https://cdn.jsdelivr.net/npm/tacit-css@1.9.7/dist/tacit-css.min.css'
-  ],
-  tufte: [
-    'https://cdnjs.cloudflare.com/ajax/libs/tufte-css/1.8.0/tufte.min.css'
-  ],
-  water: [
-    'https://cdn.jsdelivr.net/npm/water.css@2/out/water.min.css'
-  ],
-  writ: [
-    'https://writ.cmcenroe.me/1.0.4/writ.min.css'
-  ],
-  yorha: [
-    'https://cdn.jsdelivr.net/npm/yorha@1.2.0/dist/yorha.min.css'
-  ]
+  // ===== Classless =====
+  "almond": ["css/almond.min.css", 1169, "v1.2.2", 20233],
+  "attricss": ["css/attricss.min.css", 58, "master@3160620", 4292],
+  "awsm": ["css/awsm.min.css", 0, "v3.0.7", 13451],
+  "axist": ["css/axist.min.css", 111, "v1.0.0", 6872],
+  "bahunya": ["css/bahunya.min.css", 312, "master@4c92348", 19048],
+  "bamboo": ["css/bamboo.min.css", 283, "master@f7fdb9b", 5280],
+  "barecss": ["css/barecss.min.css", 117, "v1.1.0", 18639],
+  "basiccss": ["css/basiccss.min.css", 686, "master@681d40a", 2258],
+  "blades": ["css/blades.min.css", 385, "v3.1.0-beta.6", 76910],
+  "bolt": ["css/bolt.min.css", 586, "v1.0.1", 7888],
+  "bullframe": ["css/bullframe.min.css", 47, "v6.4.2", 18873],
+  "chimeracss": ["css/chimeracss.min.css", 25, "main@b3f0bad", 5313],
+  "classlesscss": ["css/classlesscss.min.css", 274, "v1.1", 9223],
+  "concrete": ["css/concrete.min.css", 633, "v3.0.0", 2894],
+  "devcss": ["css/devcss.min.css", 38, "main@8fa5836", 5448],
+  "downstyler": ["css/downstyler.min.css", 40, "master@4c681a4", 1708],
+  "fylgja": ["css/fylgja.min.css", 116, "v2.2.1", 44261],
+  "holiday": ["css/holiday.min.css", 164, "v0.11.6", 19210],
+  "latex": ["css/latex.min.css", 178, "master@9264a50", 304731],
+  "magick": ["css/magick.min.css", 1040, "master@cdec42a", 6594],
+  "markdownair": ["css/markdownair.min.css", 107, "master@f31f83d", 1676],
+  "markdownmodest": ["css/markdownmodest.min.css", 132, "master@f16599c", 1982],
+  "markdownretro": ["css/markdownretro.min.css", 129, "master@3171af7", 1654],
+  "markdownsplendor": ["css/markdownsplendor.min.css", 180, "master@40db295", 1888],
+  "marx": ["css/marx.min.css", 1710, "v5.3.2", 16979],
+  "mercury": ["css/mercury.min.css", 31, "master@173e953", 7862],
+  "micss": ["css/micss.min.css", 2, "main@16c2576", 722],
+  "mvp": ["css/mvp.min.css", 5129, "v1.18", 8171],
+  "newcss": ["css/newcss.min.css", 4051, "v1.1.3", 4477],
+  "nimble": ["css/nimble.min.css", 10, "v0.24.1", 31506],
+  "noclass": ["css/noclass.min.css", 40, "v1.0.1", 6953],
+  "pico": ["css/pico.min.css", 16834, "v2.1.1", 71040],
+  "ridge": ["css/ridge.min.css", 154, "v0.2.0", 19969],
+  "sakura": ["css/sakura.min.css", 4393, "v1.5.1", 3074],
+  "shadcn": ["css/shadcn.min.css", 8, "main@b3f94b5", 20650],
+  "simple": ["css/simple.min.css", 5020, "v2.3.7", 9429],
+  "spcss": ["css/spcss.min.css", 970, "main@ebb5197", 1369],
+  "stylecss": ["css/stylecss.min.css", 81, "v2.0.0-0", 7209],
+  "stylize": ["css/stylize.min.css", 0, "v1.0.1", 4812],
+  "tacit": ["css/tacit.min.css", 1879, "v1.9.7", 6557],
+  "tinycss": ["css/tinycss.min.css", 46, "main@27b0410", 5281],
+  "ttycss": ["css/ttycss.min.css", 10, "master@d35d0dc", 4478],
+  "tufte": ["css/tufte.min.css", 6585, "gh-pages@b5d7b7b", 6946],
+  "w3ccore": ["css/w3ccore.min.css", 0, "1998", 9369],
+  "water": ["css/water.min.css", 8655, "master@d950cbc", 22668],
+  "writ": ["css/writ.min.css", 466, "v1.0.4", 2228],
+  "yorha": ["css/yorha.min.css", 330, "master@b575933", 7939],
+  // ===== Class-light =====
+  "barrel": ["css/barrel.min.css", 7, "v0.5.2", 34971],
+  "chota": ["css/chota.min.css", 1550, "v0.8.1", 18547],
+  "matcha": ["css/matcha.min.css", 1942, "v3.0.0", 37417],
+  "milligram": ["css/milligram.min.css", 10215, "v1.4.1", 9014],
+  "minicss": ["css/minicss.min.css", 2948, "v3.0.1", 46887],
+  "mono": ["css/mono.min.css", 51, "main@f3c00aa", 10637],
+  "picnic": ["css/picnic.min.css", 3879, "master@c05e916", 39512],
+  "sasszero": ["css/sasszero.min.css", 39, "v1.5.5", 12913],
+  "wing": ["css/wing.min.css", 1991, "master@5792c1c", 5978],
+  // ===== 额外项目 =====
+  "missing": ["css/missing.min.css", 797, "dev@b74e1c0", 61364],
+  "sumi": ["css/sumi.min.css", 190, "main@d823a5f", 28245],
+  // ===== 本地开发 =====
+  "materia": ["css/materia.css", 0, "local", 6220],
+  "pure": ["css/pure.classless.css", 0, "local", 20473]
 };
 
     // Framework sheets are inserted *before* this page's <style>, so that the
@@ -862,7 +969,9 @@ const frameworks = {
     function loadFramework(name) {
       document.querySelectorAll('link[data-framework]').forEach(link => link.remove());
 
-      for (const url of frameworks[name] || []) {
+      // Element 0 is the local stylesheet path (a list, so a framework may
+      // ship more than one sheet).
+      for (const url of [].concat(frameworks[name][0])) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = url;
@@ -872,7 +981,11 @@ const frameworks = {
 
       // Single place that knows the active framework, so the toolbar label can
       // never disagree with the stylesheet actually loaded.
-      document.getElementById('fw-name').textContent = name;
+      const [, stars, version, bytes] = frameworks[name];
+      document.getElementById('fw-name').textContent = name
+        + '  \u00b7  \u2605 ' + stars.toLocaleString('en-US')
+        + '  \u00b7  ' + version
+        + '  \u00b7  ' + (bytes / 1024).toFixed(1) + ' KB';
     }
 
     // The nav pills are generated from Object.keys(frameworks): adding a
