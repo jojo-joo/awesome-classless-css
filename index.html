@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -27,6 +27,32 @@
 
     :root[data-theme="dark"] {
       color-scheme: dark;
+    }
+
+    /* =====================================================================
+       No horizontal scrolling — Chrome's device-mode shows one as soon as any
+       box's outer edge passes the viewport, and a framework stylesheet can
+       always produce such a box: attriCSS ships `blockquote { width: 100% }`
+       plus padding and a 4px left border with no border-box reset (24px too
+       wide), `table { padding: 5px }` (10px too wide), and `role=group`
+       controls can refuse to wrap.
+
+       `hidden` and not `clip`: only the root's *scrollable* overflow is
+       propagated to the viewport. Chrome does not propagate `clip` from the
+       root, so `overflow-x: clip` there silently leaves the page scrollable —
+       which is exactly what happened before. `hidden` on the root turns the
+       viewport non-scrollable horizontally while the other axis keeps
+       scrolling normally; `100vw` arithmetic and the fixed chrome are
+       unaffected.
+
+       `:root` (0,1,0) deliberately outranks a framework's `html, body`
+       (0,0,1), and this block comes after every injected sheet, so it always
+       wins — including over sheets that set `body { overflow-x: hidden }`
+       themselves.
+       ===================================================================== */
+    :root,
+    body {
+      overflow-x: hidden;
     }
 
     /* =====================================================================
@@ -336,6 +362,29 @@
       inline-size: 100%;
       max-inline-size: 100%;
       margin-block: 2.5rem 0;
+      /* a cell may not keep a min-content width wider than the column */
+      overflow-wrap: anywhere;
+      /* attriCSS puts 5px of padding on the table and ships no border-box
+         reset, so 100% would become 100% + 10px */
+      box-sizing: border-box;
+    }
+
+    /* Media test: the placeholder is a 1200×600 inline SVG, and plenty of the
+       frameworks below never add `img { max-width: 100% }` (latex, …). Without
+       this cap the figure alone is wider than any phone — or than the 62rem
+       column — and the whole page scrolls sideways. Capping it here keeps the
+       demo viewable; the framework still decides margins, borders, filters. */
+    .demo-main :is(img, video) {
+      max-inline-size: 100%;
+      block-size: auto;
+    }
+
+    /* Quote test: attriCSS ships `blockquote { width: 100%; padding: 8px 10px;
+       border-left: 4px }` without a border-box reset, i.e. 24px wider than the
+       column — exactly the kind of box that turns into a sideways scrollbar. */
+    .demo-main blockquote {
+      box-sizing: border-box;
+      max-inline-size: 100%;
     }
 
     .demo-form .demo-field> :is(input, select, textarea):not([type="color"]) {
@@ -569,7 +618,7 @@
         <p><mark>Highlighted</mark></p>
 
         <!-- Headings-->
-        <h3>Heading 3</h3>
+        <h1>Heading 3</h1>
         <p>
           Integer bibendum malesuada libero vel eleifend. Fusce iaculis turpis ipsum, at efficitur
           sem scelerisque vel. Aliquam auctor diam ut purus cursus fringilla. Class aptent taciti
@@ -706,7 +755,6 @@
             <div class="seg" role="group" aria-labelledby="gender-label">
               <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
               <label><input type="radio" name="gender" value="m"><span>Male</span></label>
-              <label><input type="radio" name="gender" value="x"><span>None</span></label>
             </div>
           </div>
       
@@ -715,7 +763,6 @@
             <div class="demo-choices" role="group" aria-labelledby="interests-label">
               <label><input type="checkbox" name="interests" value="design" checked> Design</label>
               <label><input type="checkbox" name="interests" value="code" checked> Code</label>
-              <label><input type="checkbox" name="interests" value="a11y" checked> Paint</label>
             </div>
           </div>
       
@@ -772,14 +819,13 @@
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="username">Username</label>
-            <input type="text" id="username" name="username" value="ada_l" placeholder="3–12 lowercase letters, digits or _"
-              pattern="[a-z0-9_]{3,12}" required>
+            <label class="demo-label" for="valid">Valid</label>
+            <input type="text" id="valid" name="valid" value="ada_l" aria-invalid="false">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="readonly">Read only</label>
-            <input type="text" id="readonly" name="readonly" value="ada@example.com" readonly>
+            <label class="demo-label" for="invalid">Invalid</label>
+            <input type="text" id="invalid" name="invalid" value="ada@example.com" aria-invalid="true">
           </div>
       
           <div class="demo-field">
@@ -788,8 +834,8 @@
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="notes">Notes</label>
-            <textarea id="notes" name="notes" rows="2" disabled>This textarea is disabled.</textarea>
+            <label class="demo-label" for="readonly">readonly</label>
+            <input id="readonly" name="readonly" rows="2" readonly value="This field is read-only.">
           </div>
       
           <div class="demo-actions">
@@ -865,7 +911,13 @@
         <progress id="progress-2"></progress>
       </section>
       <!-- ./ Progress -->
-
+      <!-- Loading -->
+      <section id="loading">
+        <h2>Loading</h2>
+        <article aria-busy="true"></article>
+        <button aria-busy="true">Please wait…</button>
+      </section>
+      <!-- ./ Loading -->
   </main>
 
   <script>
@@ -974,7 +1026,11 @@ const frameworks = {
     // framework means editing that one map and nothing else. The pill label is
     // the key itself, verbatim.
     function buildFrameworkPills() {
-      const pills = Object.keys(frameworks).map(name => {
+      // Sorted by key: the map above is written in category blocks (classless,
+      // class-light, extra, local) for readability, but the menu must be one
+      // flat alphabetical list — otherwise everything after `yorha` (starting
+      // with `barrel`) only shows up at position 48 and looks missing.
+      const pills = Object.keys(frameworks).sort().map(name => {
         const label = document.createElement('label');
         const input = document.createElement('input');
         input.type = 'radio';
