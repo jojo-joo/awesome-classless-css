@@ -56,6 +56,37 @@
     }
 
     /* =====================================================================
+       Locked top toolbar: one fixed, opaque strip behind the two corner
+       buttons and the centred framework name. The page scrolls underneath it
+       instead of past it, so the toolbar never moves and no content shows
+       through while scrolling.
+
+       `all: unset` + id selector, like the buttons: a framework's own
+       `body { background }` / `div { … }` cannot recolour or reflow it.
+       z-index 55 keeps it below the buttons (60), the name (59) and the
+       menu (59). It *does* take pointer events, so a click in the strip can
+       never land on content that scrolled underneath it; the two buttons sit
+       above it and stay clickable.
+       ===================================================================== */
+    #demo-bar {
+      all: unset;
+      display: block;
+      position: fixed;
+      z-index: 55;
+      inset: 0 0 auto 0;
+      block-size: 76px;
+      box-sizing: border-box;
+      border-block-end: 1px solid #00000014;
+      background: #ffffff;
+      pointer-events: auto;
+    }
+
+    :root[data-theme="dark"] #demo-bar {
+      border-block-end-color: #ffffff1f;
+      background: #16181d;
+    }
+
+    /* =====================================================================
        App chrome: two corner buttons (menu / theme) + the framework menu.
        They must keep their position, size and colour no matter which framework
        is loaded, so:
@@ -201,10 +232,10 @@
       z-index: 59;
       box-sizing: border-box;
       display: block;
-      inset-block-start: 72px;
+      inset-block-start: 88px;
       inset-inline: 16px auto;
       inline-size: min(320px, calc(100vw - 32px));
-      max-block-size: calc(100vh - 88px);
+      max-block-size: calc(100vh - 100px);
       overflow: auto;
       overscroll-behavior: contain;
       padding: 8px;
@@ -327,7 +358,7 @@
       box-sizing: border-box;
       max-inline-size: 62rem;
       margin-inline: auto;
-      /* block-start clears the two fixed corner buttons (16px offset + 44px + gap) */
+      /* block-start clears the locked toolbar strip (#demo-bar, 76px) */
       padding: 76px clamp(1rem, 4vw, 2rem) 5rem;
     }
 
@@ -508,6 +539,9 @@
 </head>
 
 <body>
+  <!-- Locked top toolbar: fixed strip, content scrolls underneath (see #demo-bar). -->
+  <div id="demo-bar" aria-hidden="true"></div>
+
   <!-- Chrome buttons, pinned to the viewport corners: the menu button top-left,
        the theme toggle top-right. See .demo-fab in the stylesheet — they are
        deliberately independent of <body> styling. -->
