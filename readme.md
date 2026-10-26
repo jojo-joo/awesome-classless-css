@@ -13,7 +13,7 @@ considering in embeded system developing, classless css could bring:
 
 ## Ranking 2026
 Render 60 classless CSS frameworks in one page for testing purpose, so their default styles can be compared.
-you can see ranking 2026 [details](ranking_2026_details.md) if you want to review the ranking rules/notes/tools.
+you can see ranking 2026 [details](ranking_2026_details.md) if you want to how the ranking works.
 | # | Framework | Stars | Version | Bytes | Rate |
 |--:|------|------:|------|------:|---|
 | 1 | [Pico](https://github.com/picocss/pico) | 16834 | v2.1.1 | 71040 | 4.4★ |

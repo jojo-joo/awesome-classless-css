@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -783,10 +783,7 @@
       
           <div class="demo-field">
             <span class="demo-label" id="gender-label">Gender</span>
-            <!-- role="radiogroup" (not "group"): it IS a radio group, and several
-                   frameworks style [role="group"] as a joined inline-flex row, which
-                   can no longer fit — and then pushed a horizontal scrollbar. -->
-            <div class="seg" role="group" aria-labelledby="gender-label">
+            <div class="seg" role="radiogroup" aria-labelledby="gender-label">
               <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
               <label><input type="radio" name="gender" value="m"><span>Male</span></label>
             </div>
@@ -797,6 +794,8 @@
             <div class="demo-choices" role="group" aria-labelledby="interests-label">
               <label><input type="checkbox" name="interests" value="design" checked> Design</label>
               <label><input type="checkbox" name="interests" value="code" checked> Code</label>
+              <label><input type="checkbox" name="interests" value="art" checked> Art</label>
+              <label><input type="checkbox" name="interests" value="Play" checked> Play</label>
             </div>
           </div>
       
