@@ -13,7 +13,7 @@ considering in embeded system developing, classless css could bring:
 
 ## Ranking 2026
 Render 60 classless CSS frameworks in one page for testing purpose, so their default styles can be compared.
-you can see ranking 2026 [details] if you want to review the ranking rules/notes/tools.
+you can see ranking 2026 [details](ranking_2026_details.md) if you want to review the ranking rules/notes/tools.
 | # | Framework | Stars | Version | Bytes | Rate |
 |--:|------|------:|------|------:|---|
 | 1 | [Pico](https://github.com/picocss/pico) | 16834 | v2.1.1 | 71040 | 4.4★ |
@@ -25,8 +25,7 @@ you can see ranking 2026 [details] if you want to review the ranking rules/notes
 | 7 | [Bahunya](https://github.com/Kimega/bahunya) | 312 | master@4c92348 | 19048 | 3.6★ |
 | 8 | [Missing](https://github.com/bigskysoftware/missing) | 797 | dev@b74e1c0 | 61364 | 3.5★ |
 
-- Data source: `data/projects.toml` from [dbohdan/classless-css](https://github.com/dbohdan/classless-css)
-  (all 56 entries), plus Sumi.css, Missing.css, Materia and Pure (Fylgja was already on that list).
+- Data source: `data/projects.toml`
 - Every stylesheet was downloaded from the project's **official GitHub repository latest
   release** (default branch when there is no release); no CSS CDN is used anywhere.
 - Everything is stored as `*.min.css`, without gzip variants; projects that only ship
@@ -34,4 +33,4 @@ you can see ranking 2026 [details] if you want to review the ranking rules/notes
 
 # Reference
 
-- [classless-css](https://github.com/dbohdan/classless-css) a list of classless CSS themes and frameworks.
+- [dbohdan/classless-css](https://github.com/dbohdan/classless-css) a list of classless CSS themes and frameworks.
