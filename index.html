@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -434,11 +434,12 @@
       min-inline-size: 0;
     }
 
-    /* The Gender row carries the `.seg` markup so materia can render a segmented
-       control; under the other frameworks it is just a label list, so give the
-       labels an inline flex row with a small gap. No align-items on purpose:
-       materia's segment text must stay stretched to the full pill height. */
-    .seg>label {
+    /* The Gender row is just `role="radiogroup"` — materia recognises that role
+       and draws a toggle-switch style track (gray pill, blue handle on the
+       checked option); under the other frameworks it stays a plain label list,
+       so give the labels an inline flex row with a small gap. No align-items on
+       purpose: materia's handle text must stay stretched to the pill height. */
+    [role="radiogroup"]>label {
       display: inline-flex;
       gap: .35rem;
     }
@@ -783,7 +784,7 @@
       
           <div class="demo-field">
             <span class="demo-label" id="gender-label">Gender</span>
-            <div class="seg" role="radiogroup" aria-labelledby="gender-label">
+            <div role="radiogroup" aria-labelledby="gender-label">
               <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
               <label><input type="radio" name="gender" value="m"><span>Male</span></label>
             </div>
