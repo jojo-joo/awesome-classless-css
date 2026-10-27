@@ -1,0 +1,781 @@
+/* ==========================================================================
+   capsule.css — a soft, pill-shaped classless theme
+
+   No class from the demo page is required: every rule keys off an element or
+   an ARIA role, so the sheet styles a plain HTML document on its own. The
+   two segmented controls are told apart by their semantic role, not a class:
+   `[role="radiogroup"]` is one choice out of n, `[role="group"]` is n
+   independent checkboxes.
+
+   Design language: quiet gray wells with a transparent 2px border that turns
+   blue on focus, 12px corners, and 999px pills for everything that is really
+   a choice (degree, interests, switch, colour swatch, volume). One accent
+   colour, no decoration beyond what is needed for depth. Dark mode follows
+   light-dark(), driven by the page's color-scheme.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design tokens
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light dark;
+
+  --primary: #2196f3;
+  --primary-hover: #1976d2;
+  --on-primary: #ffffff;
+
+  --bg-page: light-dark(#ffffff, #16181d);
+  --bg-gray: light-dark(#f3f4f6, #1e2129);
+  --bg-hover: light-dark(#e5e7eb, #2a2e37);
+  /* focused fields lift to the page colour in light mode; in dark mode they
+     go one step *lighter* than the well instead, so the field does not melt
+     into the #16181d page behind it */
+  --bg-field-focus: light-dark(#ffffff, #242832);
+
+  --text-main: light-dark(#333333, #e6e8ec);
+  --text-strong: light-dark(#111827, #f2f4f8);
+  --text-muted: light-dark(#6b7280, #9aa3b2);
+  --border-color: light-dark(#e5e7eb, #2c313a);
+
+  --valid: #10b981;
+  --invalid: #ef4444;
+
+  --radius-md: 12px;
+  --radius-pill: 999px;
+  /* Every single-line control is exactly this tall, so the "label | control"
+     rows of a form line up. Widgets that are naturally smaller (checkbox,
+     switch, colour, range) get the margin that centres them inside it. */
+  --control-block: 2.75rem;
+  --transition: background-color 0.2s ease, border-color 0.2s ease,
+    box-shadow 0.2s ease, color 0.2s ease;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  color: var(--text-main);
+}
+
+/* --------------------------------------------------------------------------
+   2. Page and typography
+   -------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg-page);
+  color: var(--text-main);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-block: 1.5em 0.5em;
+  color: var(--text-strong);
+  line-height: 1.2;
+}
+
+h2 {
+  margin-block-start: 3rem;
+  padding-block-end: 0.5rem;
+  border-block-end: 2px solid var(--border-color);
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   3. Content blocks
+   -------------------------------------------------------------------------- */
+table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0.75em 1em;
+  border-block-end: 1px solid var(--border-color);
+  text-align: start;
+}
+
+th {
+  background-color: var(--bg-gray);
+  font-weight: 600;
+}
+
+img,
+video {
+  max-inline-size: 100%;
+  block-size: auto;
+  border-radius: var(--radius-md);
+}
+
+blockquote {
+  margin-block: 1.5em;
+  margin-inline: 0;
+  padding: 1em 1.5em;
+  border-inline-start: 4px solid var(--primary);
+  border-start-start-radius: 0;
+  border-start-end-radius: var(--radius-md);
+  border-end-end-radius: var(--radius-md);
+  border-end-start-radius: 0;
+  background-color: var(--bg-gray);
+  color: var(--text-muted);
+}
+
+blockquote footer {
+  margin-block-start: 0.5em;
+  font-size: 0.9em;
+}
+
+/* --------------------------------------------------------------------------
+   4. Text controls: one quiet well per field
+
+   The exclusion list is written against the widgets that get a skin of their
+   own further down, so numbers, dates and the next new text-like `type=` all
+   inherit the well automatically. `input:not([type])` (a bare <input>) is
+   covered by the same rule because it is not in the excluded list.
+   -------------------------------------------------------------------------- */
+:where(
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="color"],
+    [type="file"],
+    [type="button"],
+    [type="submit"],
+    [type="reset"],
+    [type="image"],
+    [role="switch"]
+  ),
+  select,
+  textarea
+) {
+  inline-size: 100%;
+  min-inline-size: 0;
+  block-size: var(--control-block);
+  padding: 0 1rem;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-gray);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition);
+}
+
+/* Multiline stays multiline: the fixed height only belongs to single-line
+   boxes, so a <textarea> keeps the height its `rows` attribute asks for. */
+textarea {
+  block-size: auto;
+  min-block-size: var(--control-block);
+  padding-block: 0.6rem;
+}
+
+:where(
+  input:not(
+    [type="checkbox"],
+    [type="radio"],
+    [type="range"],
+    [type="color"],
+    [type="file"],
+    [type="button"],
+    [type="submit"],
+    [type="reset"],
+    [type="image"],
+    [role="switch"]
+  ),
+  select,
+  textarea
+):focus {
+  border-color: var(--primary);
+  background-color: var(--bg-field-focus);
+  box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+}
+
+/* Validation: only the frame changes colour — green for a valid value, red
+   for an invalid one. The well keeps the standard gray (and the usual white
+   / lifted well on focus), so the state is a border signal only. */
+input[aria-invalid="false"] {
+  border-color: var(--valid);
+}
+
+input[aria-invalid="false"]:focus {
+  border-color: var(--valid);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+input[aria-invalid="true"] {
+  border-color: var(--invalid);
+}
+
+input[aria-invalid="true"]:focus {
+  border-color: var(--invalid);
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--bg-gray);
+}
+
+/* Read-only is not disabled: it keeps the field legible, only the border
+   changes to a dashed one so the value reads as fixed. */
+input[readonly],
+textarea[readonly] {
+  border: 2px dashed light-dark(#9ca3af, #6b7280);
+  background-color: transparent;
+  cursor: default;
+}
+
+input[readonly]:focus,
+textarea[readonly]:focus {
+  border-color: light-dark(#9ca3af, #6b7280);
+  box-shadow: none;
+}
+
+/* Chevron instead of the UA arrow, drawn inline so nothing is downloaded. */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px 12px;
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   5. Checkbox and switch
+
+   A checkbox is a square well with a hand-drawn check; a switch is the same
+   idea stretched into a track, so it is a checkbox with role="switch".
+   -------------------------------------------------------------------------- */
+input[type="checkbox"]:not([role="switch"]) {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  margin-block: calc((var(--control-block) - 1.25rem) / 2);
+  margin-inline: 0;
+  padding: 0;
+  border: 2px solid var(--text-muted);
+  border-radius: 6px;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[type="checkbox"]:not([role="switch"]):checked {
+  border-color: var(--primary);
+  background-color: var(--primary);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+}
+
+input[role="switch"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex: none;
+  position: relative;
+  inline-size: 2.75rem;
+  block-size: 1.5rem;
+  margin-block: calc((var(--control-block) - 1.5rem) / 2);
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: light-dark(#d1d5db, #3a404b);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[role="switch"]::after {
+  content: "";
+  position: absolute;
+  inset-block-start: 2px;
+  inset-inline-start: 2px;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border-radius: 50%;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+input[role="switch"]:checked {
+  background-color: var(--primary);
+}
+
+input[role="switch"]:checked::after {
+  transform: translateX(1.25rem);
+}
+
+input[type="checkbox"]:focus-visible,
+input[type="radio"]:focus-visible,
+input[role="switch"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* --------------------------------------------------------------------------
+   6. Segmented pills
+
+   Both groups are recognised by role only, and the radio / checkbox itself
+   stays in the tab order (hidden, not `display: none`) so arrows and space
+   still work; the focus ring is drawn on the label through :has().
+
+   The checkbox group paints each checked segment with a ::before so the
+   first and last segment can take the track's curve while the text stays on
+   top of the fill. A checked segment that is followed by another checked one
+   loses half a pixel on its right edge: the gray track shows through as the
+   hairline that keeps two touching blue segments readable.
+   -------------------------------------------------------------------------- */
+[role="radiogroup"]:has(> label > input[type="radio"]) {
+  display: flex;
+  inline-size: 100%;
+  block-size: var(--control-block);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-gray);
+}
+
+[role="radiogroup"]:has(> label > input[type="radio"]) > label {
+  position: relative;
+  display: flex;
+  flex: 1 1 0;
+  min-inline-size: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+[role="radiogroup"]:has(> label > input[type="radio"]) > label > input[type="radio"] {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[role="radiogroup"]:has(> label > input[type="radio"]) > label:has(> input:checked) {
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.22);
+}
+
+[role="radiogroup"]:has(> label > input[type="radio"]) > label:has(> input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+[role="radiogroup"]:has(> label > input[type="radio"]) > label:has(> input:checked):has(> input:focus-visible) {
+  outline-color: var(--on-primary);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 0;
+  inline-size: 100%;
+  block-size: var(--control-block);
+  padding: 4px;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-gray);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 0;
+  min-inline-size: 0;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 6px 8px;
+  border-radius: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.6;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label > input {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked) {
+  color: var(--on-primary);
+  font-weight: 500;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--primary);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:first-child:has(> input:checked)::before {
+  border-start-start-radius: var(--radius-pill);
+  border-end-start-radius: var(--radius-pill);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:last-child:has(> input:checked)::before {
+  border-start-end-radius: var(--radius-pill);
+  border-end-end-radius: var(--radius-pill);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked):has(+ label > input:checked)::before {
+  clip-path: inset(0 0.5px 0 0);
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:focus-visible) {
+  outline: 2px solid var(--primary);
+  outline-offset: -2px;
+}
+
+[role="group"]:has(> label > input[type="checkbox"]) > label:has(> input:checked):has(> input:focus-visible) {
+  outline-color: var(--on-primary);
+}
+
+/* --------------------------------------------------------------------------
+   7. File, colour and range
+   -------------------------------------------------------------------------- */
+input[type="file"] {
+  /* The native button and the file name are one line; flexbox keeps that
+     line centred in the standard control height instead of glued to the
+     top edge, which is what a bare block-size would do. */
+  display: flex;
+  align-items: center;
+  block-size: var(--control-block);
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  font-size: 0.9rem;
+}
+
+input[type="file"]::file-selector-button {
+  margin-inline-end: 1rem;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-gray);
+  color: var(--text-main);
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: var(--bg-hover);
+}
+
+input[type="color"] {
+  justify-self: start;
+  margin-block: calc((var(--control-block) - 2rem) / 2);
+  inline-size: 64px;
+  block-size: 32px;
+  padding: 0;
+  border: 3px solid var(--on-primary);
+  border-radius: var(--radius-pill);
+  background: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: 0;
+  border-radius: var(--radius-pill);
+}
+
+input[type="color"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+input[type="range"] {
+  appearance: none;
+  -webkit-appearance: none;
+  inline-size: 100%;
+  block-size: 8px;
+  margin-block: calc((var(--control-block) - 8px) / 2);
+  margin-inline: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-hover);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  width: 0.8rem;
+  height: 1.6rem;
+  border: 3px solid #ffffff;
+  border-radius: var(--radius-pill);
+  background-color: var(--primary);
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.4);
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+  block-size: 8px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-hover);
+}
+
+input[type="range"]::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 0.8rem;
+  height: 1.6rem;
+  border: 3px solid #ffffff;
+  border-radius: var(--radius-pill);
+  background-color: var(--primary);
+  box-shadow: 0 2px 6px rgba(33, 150, 243, 0.4);
+}
+
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Buttons and dialog
+   -------------------------------------------------------------------------- */
+button {
+  block-size: var(--control-block);
+  padding: 0 1.5rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--primary);
+  color: var(--on-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.6;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+dialog {
+  max-inline-size: 500px;
+  padding: 2rem;
+  border: 0;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(2px);
+}
+
+/* --------------------------------------------------------------------------
+   9. Accordion, progress, loading
+   -------------------------------------------------------------------------- */
+details {
+  margin-block: 0 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background-color: var(--bg-gray);
+}
+
+summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  list-style: none;
+  cursor: pointer;
+  outline: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+summary::after {
+  content: "";
+  flex: none;
+  inline-size: 16px;
+  block-size: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: transform 0.2s ease;
+}
+
+details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+details[open] summary {
+  margin-block-end: 1rem;
+}
+
+summary:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+}
+
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  inline-size: 100%;
+  block-size: 0.6rem;
+  margin-block-end: 1rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-gray);
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: var(--bg-gray);
+}
+
+progress::-webkit-progress-value {
+  border-radius: var(--radius-pill);
+  background-color: var(--primary);
+}
+
+progress::-moz-progress-bar {
+  border-radius: var(--radius-pill);
+  background-color: var(--primary);
+}
+
+/* Pico's model rather than an overlay: the spinner is an inline ::before
+   that sits *before* the label with a small gap, so it can never cover the
+   text. An empty placeholder (an empty <article>) gets a line of its own,
+   with the spinner centred on it. */
+[aria-busy="true"] {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+[aria-busy="true"]::before {
+  content: "";
+  display: inline-block;
+  inline-size: 1em;
+  block-size: 1em;
+  vertical-align: -0.125em;
+  border: 2px solid var(--primary);
+  border-block-start-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+/* on a filled button the accent ring would vanish into the accent background,
+   so there it follows the label colour instead */
+[aria-busy="true"]:is(button, [role="button"], [type="submit"], [type="button"], [type="reset"])::before {
+  border-color: currentColor;
+  border-block-start-color: transparent;
+}
+
+[aria-busy="true"]:not(:empty)::before {
+  margin-inline-end: 0.5em;
+}
+
+[aria-busy="true"]:empty {
+  display: block;
+  text-align: center;
+}
+
+[aria-busy="true"]:is(button, [role="button"], [type="submit"], [type="button"], [type="reset"]) {
+  pointer-events: none;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

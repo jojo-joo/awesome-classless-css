@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -6,17 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classless CSS — Form Controls Test</title>
 
-  <!--
-    Page chrome ONLY (top bar + a two-column grid). The form elements below are
-    deliberately left un-classed so each framework styles them itself.
-    No `!important` and no framework-agnostic resets, so what you see is the
-    framework's own rendering.
-  -->
   <style id="demo-style">
-    /* The theme toggle pins `color-scheme` on :root. Without an explicit choice
-       the page follows the OS; with `data-theme` set it is locked. Everything
-       below that uses light-dark() — and the UA widgets (date pickers, range,
-       scrollbars) — follow from here. */
     :root {
       color-scheme: light dark;
     }
@@ -29,46 +19,12 @@
       color-scheme: dark;
     }
 
-    /* =====================================================================
-       No horizontal scrolling — Chrome's device-mode shows one as soon as any
-       box's outer edge passes the viewport, and a framework stylesheet can
-       always produce such a box: attriCSS ships `blockquote { width: 100% }`
-       plus padding and a 4px left border with no border-box reset (24px too
-       wide), `table { padding: 5px }` (10px too wide), and `role=group`
-       controls can refuse to wrap.
-
-       `hidden` and not `clip`: only the root's *scrollable* overflow is
-       propagated to the viewport. Chrome does not propagate `clip` from the
-       root, so `overflow-x: clip` there silently leaves the page scrollable —
-       which is exactly what happened before. `hidden` on the root turns the
-       viewport non-scrollable horizontally while the other axis keeps
-       scrolling normally; `100vw` arithmetic and the fixed chrome are
-       unaffected.
-
-       `:root` (0,1,0) deliberately outranks a framework's `html, body`
-       (0,0,1), and this block comes after every injected sheet, so it always
-       wins — including over sheets that set `body { overflow-x: hidden }`
-       themselves.
-       ===================================================================== */
     :root,
     body {
       overflow-x: hidden;
     }
 
-    /* =====================================================================
-       Locked top toolbar: one fixed, opaque strip behind the two corner
-       buttons and the centred framework name. The page scrolls underneath it
-       instead of past it, so the toolbar never moves and no content shows
-       through while scrolling.
-
-       `all: unset` + id selector, like the buttons: a framework's own
-       `body { background }` / `div { … }` cannot recolour or reflow it.
-       z-index 55 keeps it below the buttons (60), the name (59) and the
-       menu (59). It *does* take pointer events, so a click in the strip can
-       never land on content that scrolled underneath it; the two buttons sit
-       above it and stay clickable.
-       ===================================================================== */
-    #demo-bar {
+    #demo-bar { 
       all: unset;
       display: block;
       position: fixed;
@@ -86,21 +42,6 @@
       background: #16181d;
     }
 
-    /* =====================================================================
-       App chrome: two corner buttons (menu / theme) + the framework menu.
-       They must keep their position, size and colour no matter which framework
-       is loaded, so:
-
-       - pinned with position: fixed, so <body> layout cannot move them;
-       - sized in px, so a framework's root font-size cannot rescale them;
-       - reset with `all: unset` and then declared property by property;
-       - matched through their id (:is(#nav-toggle, #theme-toggle) = 1,1,0), so
-         a framework rule like yorha's `button:not(:disabled)` (0,1,1) loses;
-       - offset with `100vw - 100%`, because 100vw counts the scrollbar and any
-         scrollbar-gutter while the fixed containing block does not — without
-         this, frameworks that set `html { scrollbar-gutter: stable }`
-         (fylgja, bullframe, marx) push the right-hand button 15px inwards.
-       ===================================================================== */
     :is(#nav-toggle, #theme-toggle).demo-fab {
       all: unset;
       position: fixed;
@@ -147,7 +88,6 @@
       outline-color: #7ab6ff;
     }
 
-    /* Corners: 16px from the *visual* viewport edge on every framework. */
     #nav-toggle.demo-fab {
       inset-block-start: calc(16px - (100vh - 100%));
       inset-inline-start: 16px;
@@ -158,7 +98,6 @@
       inset-inline-end: calc(16px - (100vw - 100%));
     }
 
-    /* Three bars, drawn from spans: no glyph, font or icon font involved. */
     .demo-bars {
       display: flex;
       flex-direction: column;
@@ -180,7 +119,6 @@
       pointer-events: none;
     }
 
-    /* Show the icon of the mode you would switch *to*: moon in light, sun in dark. */
     #theme-toggle .i-sun {
       display: none;
     }
@@ -193,10 +131,6 @@
       display: none;
     }
 
-    /* ---- current framework name, centred in the toolbar -------------------
-       Pinned and id-matched for the same reason as the two buttons: nothing a
-       framework does to <body> may shift, resize or recolour it. pointer-events
-       are off so it never steals a click from what is behind it. */
     #fw-name {
       all: unset;
       position: fixed;
@@ -204,9 +138,6 @@
       box-sizing: border-box;
       display: block;
       inset-block-start: calc(16px - (100vh - 100%));
-      /* the inline-end value is pulled in by the scrollbar width too, otherwise
-         a framework with `html { scrollbar-gutter: stable }` (fylgja,
-         bullframe, marx, nimble) shifts the label 7.5px off centre */
       inset-inline: 72px calc(72px - (100vw - 100%));
       block-size: 44px;
       overflow: hidden;
@@ -222,10 +153,6 @@
       color: #eceef2;
     }
 
-    /* ---- the menu the left button opens: one long vertical list ----------
-       #fw-menu instead of .demo-menu on purpose: <nav> is a semantic element
-       that frameworks restyle (bahunya makes it full-width), and an id outranks
-       every element and class selector a framework can use. */
     #fw-menu {
       all: unset;
       position: fixed;
@@ -268,10 +195,6 @@
       opacity: .6;
     }
 
-    /* Framework switcher, as a vertical menu: one full-width row per framework,
-       radio still the source of truth so the existing JS keeps working.
-       align-items: stretch is explicit because materia ships a global
-       `div { align-items: center }`, which would centre every row. */
     #fw-menu .demo-switch {
       display: flex;
       flex-direction: column;
@@ -279,6 +202,11 @@
       gap: 2px;
       margin: 0;
       padding: 0;
+      border: 0;
+      border-radius: 0;
+      block-size: auto;
+      background: none;
+      box-shadow: none;
     }
 
     #fw-menu .demo-switch label {
@@ -297,7 +225,6 @@
       cursor: pointer;
     }
 
-    /* radio dot, so the list reads as a menu rather than as plain text */
     #fw-menu .demo-switch label::before {
       content: "";
       flex: 0 0 auto;
@@ -349,70 +276,47 @@
     }
 
     .demo-main {
-      /* inline-size: 100% matters: some frameworks make <body> a flex column
-         (fylgja's theme.css does), and then margin-inline: auto cancels the
-         cross-axis stretch and the whole form shrinks to fit-content.
-         box-sizing matters too: materia is the only framework here that does
-         not ship the global `* { box-sizing: border-box }` reset. */
       inline-size: 100%;
       box-sizing: border-box;
       max-inline-size: 62rem;
       margin-inline: auto;
-      /* block-start clears the locked toolbar strip (#demo-bar, 76px) */
       padding: 76px clamp(1rem, 4vw, 2rem) 5rem;
     }
 
-    /* The demo form must never be wider than its column: some frameworks pad or
-       fix the width of <form> itself (mvp adds 1.5rem padding content-box). */
     .demo-form {
       box-sizing: border-box;
       inline-size: 100%;
       max-inline-size: 100%;
     }
 
-    /* Two-column "label | control" grid, one row per control. */
     .demo-field {
       display: grid;
       grid-template-columns: minmax(0, 12rem) minmax(0, 1fr);
       align-items: center;
       gap: .35rem 1rem;
       margin-block: .8rem;
-      /* missing.css sizes inputs to 20ch by design; its own escape hatch makes
-         them fill the grid column instead. Ignored by the other frameworks. */
       --input-inline-size-internal: 100%;
     }
 
     .demo-field>.demo-label {
       justify-self: end;
       text-align: end;
-      font-weight: 500;
+      font-weight: 600;
     }
 
-    /* Table test: only spacing is page chrome, the look is left to the framework. */
     .demo-main>table {
       inline-size: 100%;
       max-inline-size: 100%;
       margin-block: 2.5rem 0;
-      /* a cell may not keep a min-content width wider than the column */
       overflow-wrap: anywhere;
-      /* attriCSS puts 5px of padding on the table and ships no border-box
-         reset, so 100% would become 100% + 10px */
       box-sizing: border-box;
     }
 
-    /* Media test: the placeholder is a 1200×600 inline SVG, and plenty of the
-       frameworks below never add `img { max-width: 100% }` (latex, …). Without
-       this cap the figure alone is wider than any phone — or than the 62rem
-       column — and the whole page scrolls sideways. Capping it here keeps the
-       demo viewable; the framework still decides margins, borders, filters. */
     .demo-main :is(img, video) {
       max-inline-size: 100%;
       block-size: auto;
     }
 
-    /* Quote test: attriCSS ships `blockquote { width: 100%; padding: 8px 10px;
-       border-left: 4px }` without a border-box reset, i.e. 24px wider than the
-       column — exactly the kind of box that turns into a sideways scrollbar. */
     .demo-main blockquote {
       box-sizing: border-box;
       max-inline-size: 100%;
@@ -420,25 +324,24 @@
 
     .demo-form .demo-field> :is(input, select, textarea):not([type="color"]) {
       inline-size: 100%;
-      /* some frameworks give form controls a px min-width (almond: 240px), which
-         on a phone is wider than the whole control column and pushes a
-         horizontal scrollbar. The demo column is always allowed to shrink. */
       min-inline-size: 0;
-      /* and a framework's own padding must not be added on top of 100% */
       box-sizing: border-box;
     }
 
-    /* The colour swatch keeps its 60px size (materia) but may not inherit a
-       framework min-width either. */
     .demo-form .demo-field> input[type="color"] {
       min-inline-size: 0;
     }
 
-    /* The Gender row is just `role="radiogroup"` — materia recognises that role
-       and draws a toggle-switch style track (gray pill, blue handle on the
-       checked option); under the other frameworks it stays a plain label list,
-       so give the labels an inline flex row with a small gap. No align-items on
-       purpose: materia's handle text must stay stretched to the pill height. */
+    /* Pico and Milligram both give the label a bottom margin and give the
+       control its own block padding / height, so centring the two boxes leaves
+       the label text a few pixels off the text inside the control (most visible
+       on file inputs). Align the text baselines instead; multi-line controls
+       (textarea) and non-text controls (range, color) keep the centred layout. */
+    :root:is([data-fw="pico"], [data-fw="milligram"]) .demo-form .demo-field:has(
+        > :is(input:not([type="range"], [type="color"], [type="checkbox"], [type="radio"]), select)) {
+      align-items: baseline;
+    }
+
     [role="radiogroup"]>label {
       display: inline-flex;
       gap: .35rem;
@@ -454,7 +357,6 @@
     .demo-form .demo-choices label {
       display: inline-flex;
       flex: 0 1 auto;
-      /* pico stretches these to fill the row */
       align-items: center;
       gap: .4rem;
       margin: 0;
@@ -467,7 +369,6 @@
       align-items: center;
       gap: .75rem;
       margin-block-start: 1.5rem;
-      /* Line the buttons up with the control column of the grid above. */
       margin-inline-start: calc(12rem + 1rem);
     }
 
@@ -490,8 +391,6 @@
       margin-block-start: 1.75rem;
     }
 
-    /* 窄屏（Chrome 手机模式）同样保持「标签 | 控件」左右分栏：
-       标签列收窄到 7rem（桌面是 12rem），固定宽度保证各行标签右边缘对齐。 */
     @media (max-width: 34rem) {
       .demo-field {
         grid-template-columns: minmax(0, 7rem) minmax(0, 1fr);
@@ -505,23 +404,18 @@
   </style>
 
   <script>
-    // Theme bootstrap — runs before first paint so the page never flashes the
-    // wrong mode. Order of precedence: explicit choice > OS preference.
     (function () {
       const STORAGE_KEY = 'classless-form-demo-theme';
       const root = document.documentElement;
       let saved = null;
-      try { saved = localStorage.getItem(STORAGE_KEY); } catch (error) { /* file:// */ }
+      try { saved = localStorage.getItem(STORAGE_KEY); } catch (error) { }
 
-      // Pico and Sumi read [data-theme], missing.css reads the two classes,
-      // and `color-scheme` (set from [data-theme] in the stylesheet) drives
-      // missing.css's light-dark() palettes, the UA widgets and Fylgja.
       window.setDemoTheme = function (mode, remember) {
         root.dataset.theme = mode;
         root.classList.toggle('-dark-theme', mode === 'dark');
         root.classList.toggle('-no-dark-theme', mode === 'light');
         if (remember) {
-          try { localStorage.setItem(STORAGE_KEY, mode); } catch (error) { /* file:// */ }
+          try { localStorage.setItem(STORAGE_KEY, mode); } catch (error) { }
         }
         document.dispatchEvent(new CustomEvent('demo:themechange', { detail: mode }));
       };
@@ -529,7 +423,6 @@
       const darkQuery = matchMedia('(prefers-color-scheme: dark)');
       setDemoTheme(saved || (darkQuery.matches ? 'dark' : 'light'), false);
 
-      // Keep following the OS until the visitor picks a theme themselves.
       if (!saved) {
         darkQuery.addEventListener('change', event => {
           setDemoTheme(event.matches ? 'dark' : 'light', false);
@@ -540,22 +433,16 @@
 </head>
 
 <body>
-  <!-- Locked top toolbar: fixed strip, content scrolls underneath (see #demo-bar). -->
   <div id="demo-bar" aria-hidden="true"></div>
 
-  <!-- Chrome buttons, pinned to the viewport corners: the menu button top-left,
-       the theme toggle top-right. See .demo-fab in the stylesheet — they are
-       deliberately independent of <body> styling. -->
-  <button type="button" class="demo-fab demo-fab--nav" id="nav-toggle" aria-expanded="false"
+  <button type="button" class="demo-fab" id="nav-toggle" aria-expanded="false"
     aria-controls="fw-menu" aria-label="Choose a CSS framework" title="Choose a CSS framework">
     <span class="demo-bars" aria-hidden="true"><span></span><span></span><span></span></span>
   </button>
 
-  <!-- Current framework, kept in the middle of the toolbar. Filled by
-       loadFramework() so it can never drift from the active stylesheet. -->
   <span id="fw-name" aria-live="polite"></span>
 
-  <button type="button" class="demo-fab demo-fab--theme" id="theme-toggle" aria-label="Switch to dark theme"
+  <button type="button" class="demo-fab" id="theme-toggle" aria-label="Switch to dark theme"
     title="Switch to dark theme">
     <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
       aria-hidden="true" focusable="false">
@@ -568,12 +455,10 @@
     </svg>
   </button>
 
-  <nav class="demo-menu" id="fw-menu" hidden aria-label="CSS framework">
+  <nav id="fw-menu" hidden aria-label="CSS framework">
     <p class="demo-menu-title">Classless CSS · Form Test</p>
 
-    <!-- Items are generated from the keys of the `frameworks` map in the
-         script at the bottom of this file. Do not hand-write them here. -->
-    <div class="demo-switch" role="radiogroup" aria-label="CSS framework"></div>
+    <div class="demo-switch" role="group" aria-label="CSS framework"></div>
   </nav>
 
   <main class="demo-main">
@@ -606,8 +491,6 @@
           </tbody>
         </table>
       </section>
-          <!-- Preview -->
-      <!-- Typography-->
       <section id="typography">
         <h2>Typography</h2>
         <p>
@@ -616,7 +499,6 @@
           felis.
         </p>
 
-        <!-- Blockquote-->
         <blockquote>
           "Maecenas vehicula metus tellus, vitae congue turpis hendrerit non. Nam at dui sit amet
           ipsum cursus ornare."
@@ -625,7 +507,6 @@
           </footer>
         </blockquote>
 
-        <!-- Lists-->
         <h3>Lists</h3>
         <ul>
           <li>Aliquam lobortis lacus eu libero ornare facilisis.</li>
@@ -634,7 +515,6 @@
           <li>Proin ultricies turpis et volutpat vehicula.</li>
         </ul>
 
-        <!-- Inline text elements-->
         <h3>Inline text elements</h3>
         <p><a href="#" onclick="event.preventDefault()">Link</a></p>
         <p><strong>Bold</strong></p>
@@ -652,7 +532,6 @@
         <p><kbd>Kbd</kbd></p>
         <p><mark>Highlighted</mark></p>
 
-        <!-- Headings-->
         <h1>Heading 3</h1>
         <p>
           Integer bibendum malesuada libero vel eleifend. Fusce iaculis turpis ipsum, at efficitur
@@ -679,7 +558,6 @@
           velit.
         </p>
 
-        <!-- Medias-->
         <figure>
           <img
             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAwIiBoZWlnaHQ9IjYwMCIgdmlld0JveD0iMCAwIDEyMDAgNjAwIj4KPHJlY3Qgd2lkdGg9IjEyMDAiIGhlaWdodD0iNjAwIiBmaWxsPSIjZGZlN2YwIi8+CjxjaXJjbGUgY3g9IjkzMCIgY3k9IjE1MCIgcj0iNzAiIGZpbGw9IiNmMmM5NGMiLz4KPHBhdGggZD0iTTAgNjAwIEwzODAgMjUwIEw3MDAgNTIwIEw5MDAgMzYwIEwxMjAwIDYwMFoiIGZpbGw9IiM4ZWE5YzEiLz4KPHBhdGggZD0iTTAgNjAwIEwzMDAgMzgwIEw1NjAgNTYwIEw3NjAgNDMwIEwxMjAwIDYwMFoiIGZpbGw9IiM1YzdmOWUiLz4KPC9zdmc+"
@@ -688,77 +566,74 @@
           <figcaption>内联 SVG 占位图（离线可用）</figcaption>
         </figure>
       </section>
-      <!-- ./ Typography-->
 
-      <!-- Form elements-->
       <section id="form">
         <h2>Form Elements</h2>
         <form id="settings" class="demo-form" autocomplete="on">
           <div class="demo-field">
-            <label class="demo-label" for="name">Name</label>
-            <input type="text" id="name" name="name" value="Ada Lovelace" placeholder="Ada Lovelace" autocomplete="name"
-              required>
+            <label class="demo-label">Name</label>
+            <input type="text" name="name" value="Ada Lovelace" placeholder="Ada Lovelace" autocomplete="name" required>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="email">Email</label>
-            <input type="email" id="email" name="email" value="ada@example.com" placeholder="ada@example.com"
+            <label class="demo-label">Email</label>
+            <input type="email" name="email" value="ada@example.com" placeholder="ada@example.com"
               autocomplete="email" required>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="password">Password</label>
-            <input type="password" id="password" name="password" value="correct horse" minlength="8"
+            <label class="demo-label">Password</label>
+            <input type="password" name="password" value="correct horse" minlength="8"
               autocomplete="new-password">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" placeholder="+1 555 0100" pattern="[0-9+\-\s]{7,20}" autocomplete="tel">
+            <label class="demo-label">Phone</label>
+            <input type="tel" name="phone" placeholder="+1 555 0100" pattern="[0-9+\-\s]{7,20}" autocomplete="tel">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="website">Website</label>
-            <input type="url" id="website" name="website" placeholder="https://example.com" autocomplete="url">
+            <label class="demo-label">Website</label>
+            <input type="url" name="website" placeholder="https://example.com" autocomplete="url">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="age">Age</label>
-            <input type="number" id="age" name="age" value="36" min="1" max="120" step="1">
+            <label class="demo-label">Age</label>
+            <input type="number" name="age" value="36" min="1" max="120" step="1">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="search">Search</label>
-            <input type="search" id="search" name="search" placeholder="Search settings…">
+            <label class="demo-label">Search</label>
+            <input type="search" name="search" placeholder="Search settings…">
           </div>
           <div class="demo-field">
-            <label class="demo-label" for="birthday">Date</label>
-            <input type="date" id="birthday" name="birthday" value="1990-04-12">
-          </div>
-      
-          <div class="demo-field">
-            <label class="demo-label" for="alarm">Time</label>
-            <input type="time" id="alarm" name="alarm" value="08:30">
+            <label class="demo-label">Date</label>
+            <input type="date" name="birthday" value="1990-04-12">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="meeting">Date &amp; time</label>
-            <input type="datetime-local" id="meeting" name="meeting" value="2025-01-31T09:00">
+            <label class="demo-label">Time</label>
+            <input type="time" name="alarm" value="08:30">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="expiry">Month</label>
-            <input type="month" id="expiry" name="expiry" value="2027-06">
+            <label class="demo-label">Date &amp; time</label>
+            <input type="datetime-local" name="meeting" value="2025-01-31T09:00">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="sprint">Week</label>
-            <input type="week" id="sprint" name="sprint" value="2025-W05">
+            <label class="demo-label">Month</label>
+            <input type="month" name="expiry" value="2027-06">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="country">Country</label>
-            <select id="country" name="country">
+            <label class="demo-label">Week</label>
+            <input type="week" name="sprint" value="2025-W05">
+          </div>
+      
+          <div class="demo-field">
+            <label class="demo-label">Country</label>
+            <select name="country">
               <option value="">Choose a country…</option>
               <option value="de">Germany</option>
               <option value="fr">France</option>
@@ -769,8 +644,8 @@
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="tz">Time zone</label>
-            <select id="tz" name="tz">
+            <label class="demo-label">Time zone</label>
+            <select name="tz">
               <optgroup label="Europe">
                 <option value="cet" selected>Berlin (CET)</option>
                 <option value="gmt">London (GMT)</option>
@@ -783,10 +658,11 @@
           </div>
       
           <div class="demo-field">
-            <span class="demo-label" id="gender-label">Gender</span>
+            <span class="demo-label" id="gender-label">Degree</span>
             <div role="radiogroup" aria-labelledby="gender-label">
-              <label><input type="radio" name="gender" value="f" checked><span>Female</span></label>
-              <label><input type="radio" name="gender" value="m"><span>Male</span></label>
+              <label><input type="radio" name="gender" value="b" checked><span>Bachelor</span></label>
+              <label><input type="radio" name="gender" value="m"><span>Master</span></label>
+              <label><input type="radio" name="gender" value="d"><span>PhD</span></label>
             </div>
           </div>
       
@@ -809,36 +685,36 @@
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="notify">Notifications</label>
+            <label class="demo-label">Notifications</label>
             <div class="demo-choices">
-              <label><input type="checkbox" id="notify" name="notify" value="on" role="switch" checked> Email me about
+              <label><input type="checkbox" name="notify" value="on" role="switch" checked> Email me about
                 updates</label>
             </div>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="avatar">Avatar</label>
-            <input type="file" id="avatar" name="avatar" accept="image/*">
+            <label class="demo-label">Avatar</label>
+            <input type="file" name="avatar" accept="image/*">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="docs">Attachments</label>
-            <input type="file" id="docs" name="docs" multiple>
+            <label class="demo-label">Attachments</label>
+            <input type="file" name="docs" multiple>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="accent">Accent</label>
-            <input type="color" id="accent" name="accent" value="#2196F3">
+            <label class="demo-label">Accent</label>
+            <input type="color" name="accent" value="#2196F3">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="volume">Volume</label>
-            <input type="range" id="volume" name="volume" min="0" max="100" step="5" value="70">
+            <label class="demo-label">Volume</label>
+            <input type="range" name="volume" min="0" max="100" step="5" value="70">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="editor">Editor</label>
-            <input type="text" id="editor" name="editor" list="editors" placeholder="Pick or type an editor…">
+            <label class="demo-label">Editor</label>
+            <input type="text" name="editor" list="editors" placeholder="Pick or type an editor…">
             <datalist id="editors">
               <option value="Neovim"></option>
               <option value="VS Code"></option>
@@ -848,28 +724,28 @@
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="bio">Bio</label>
-            <textarea id="bio" name="bio" rows="4" placeholder="A few words about yourself…">CSS enthusiast.</textarea>
+            <label class="demo-label">Bio</label>
+            <textarea name="bio" rows="4" placeholder="A few words about yourself…">CSS enthusiast.</textarea>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="valid">Valid</label>
-            <input type="text" id="valid" name="valid" value="ada_l" aria-invalid="false">
+            <label class="demo-label">Valid</label>
+            <input type="text" name="valid" value="ada_l" aria-invalid="false">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="invalid">Invalid</label>
-            <input type="text" id="invalid" name="invalid" value="ada@example.com" aria-invalid="true">
+            <label class="demo-label">Invalid</label>
+            <input type="text" name="invalid" value="ada@example.com" aria-invalid="true">
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="disabled">Disabled</label>
-            <input type="text" id="disabled" name="disabled" value="Cannot be edited" disabled>
+            <label class="demo-label">Disabled</label>
+            <input type="text" name="disabled" value="Cannot be edited" disabled>
           </div>
       
           <div class="demo-field">
-            <label class="demo-label" for="readonly">readonly</label>
-            <input id="readonly" name="readonly" rows="2" readonly value="This field is read-only.">
+            <label class="demo-label">readonly</label>
+            <input name="readonly" rows="2" readonly value="This field is read-only.">
           </div>
       
           <div class="demo-actions">
@@ -878,12 +754,10 @@
             <button type="button" disabled>Unavailable</button>
           </div>
       
-          <output class="demo-result" id="result" for="name email phone" aria-live="polite"></output>
+          <output class="demo-result" id="result" aria-live="polite"></output>
         </form>
       </section>
-      <!-- ./ Form elements-->
 
-      <!-- Modal -->
       <section id="modal">
         <h2>Modal</h2>
         <button class="contrast" onclick="modalExample.showModal()">Launch demo modal</button>
@@ -895,9 +769,7 @@
           </form>
         </dialog>
       </section>
-      <!-- ./ Modal -->
 
-      <!-- Accordions -->
       <section id="accordions">
         <h2>Accordions</h2>
         <details>
@@ -921,9 +793,7 @@
           </ul>
         </details>
       </section>
-      <!-- ./ Accordions -->
 
-      <!-- Article-->
       <article id="article">
         <h2>Article</h2>
         <p>
@@ -936,30 +806,21 @@
           <small>Duis nec elit placerat, suscipit nibh quis, finibus neque.</small>
         </footer>
       </article>
-      <!-- ./ Article-->
 
-      <!-- Progress -->
       <section id="progress">
         <h2>Progress bar</h2>
         <progress id="progress-1" value="25" max="100"></progress>
         <progress id="progress-2"></progress>
       </section>
-      <!-- ./ Progress -->
-      <!-- Loading -->
       <section id="loading">
         <h2>Loading</h2>
         <article aria-busy="true"></article>
         <button aria-busy="true">Please wait…</button>
       </section>
-      <!-- ./ Loading -->
   </main>
 
   <script>
-    // 数据由 tools/gen.py 生成：每个框架都是
-    //   [本地样式表, GitHub 星数, 版本, 文件字节数]
-    // 样式表已全部下载到 css/，运行时只读本地文件，不请求任何 CDN。
 const frameworks = {
-  // ===== Classless =====
   "almond": ["css/almond.min.css", 1169, "v1.2.2", 20233],
   "attricss": ["css/attricss.min.css", 58, "master@3160620", 4292],
   "awsm": ["css/awsm.min.css", 0, "v3.0.7", 13451],
@@ -1007,7 +868,6 @@ const frameworks = {
   "water": ["css/water.min.css", 8655, "master@d950cbc", 22668],
   "writ": ["css/writ.min.css", 466, "v1.0.4", 2228],
   "yorha": ["css/yorha.min.css", 330, "master@b575933", 7939],
-  // ===== Class-light =====
   "barrel": ["css/barrel.min.css", 7, "v0.5.2", 34971],
   "chota": ["css/chota.min.css", 1550, "v0.8.1", 18547],
   "matcha": ["css/matcha.min.css", 1942, "v3.0.0", 37417],
@@ -1017,18 +877,13 @@ const frameworks = {
   "picnic": ["css/picnic.min.css", 3879, "master@c05e916", 39512],
   "sasszero": ["css/sasszero.min.css", 39, "v1.5.5", 12913],
   "wing": ["css/wing.min.css", 1991, "master@5792c1c", 5978],
-  // ===== 额外项目 =====
   "missing": ["css/missing.min.css", 797, "dev@b74e1c0", 61364],
   "sumi": ["css/sumi.min.css", 190, "main@d823a5f", 28245],
-  // ===== 本地开发 =====
+  "capsule": ["css/capsule.css", 0, "local", 20947],
   "materia": ["css/materia.css", 0, "local", 6220],
   "pure": ["css/pure.classless.css", 0, "local", 20473]
 };
 
-    // Framework sheets are inserted *before* this page's <style>, so that the
-    // page chrome (bar, grid, column widths) always wins a specificity tie.
-    // Otherwise e.g. missing.css's 20ch input width beats an equal-specificity
-    // rule here and the inputs collapse to 20 characters.
     const pageStyle = document.getElementById('demo-style');
     const switchEl = document.querySelector('.demo-switch');
     const form = document.getElementById('settings');
@@ -1036,9 +891,9 @@ const frameworks = {
 
     function loadFramework(name) {
       document.querySelectorAll('link[data-framework]').forEach(link => link.remove());
+      // Lets the demo styles target a specific framework (see [data-fw] above).
+      document.documentElement.dataset.fw = name;
 
-      // Element 0 is the local stylesheet path (a list, so a framework may
-      // ship more than one sheet).
       for (const url of [].concat(frameworks[name][0])) {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
@@ -1047,8 +902,6 @@ const frameworks = {
         document.head.insertBefore(link, pageStyle);
       }
 
-      // Single place that knows the active framework, so the toolbar label can
-      // never disagree with the stylesheet actually loaded.
       const [, stars, version, bytes] = frameworks[name];
       document.getElementById('fw-name').textContent = name
         + '  \u00b7  \u2605 ' + stars.toLocaleString('en-US')
@@ -1056,14 +909,7 @@ const frameworks = {
         + '  \u00b7  ' + (bytes / 1024).toFixed(1) + ' KB';
     }
 
-    // The nav pills are generated from Object.keys(frameworks): adding a
-    // framework means editing that one map and nothing else. The pill label is
-    // the key itself, verbatim.
     function buildFrameworkPills() {
-      // Sorted by key: the map above is written in category blocks (classless,
-      // class-light, extra, local) for readability, but the menu must be one
-      // flat alphabetical list — otherwise everything after `yorha` (starting
-      // with `barrel`) only shows up at position 48 and looks missing.
       const pills = Object.keys(frameworks).sort().map(name => {
         const label = document.createElement('label');
         const input = document.createElement('input');
@@ -1085,7 +931,6 @@ const frameworks = {
       setMenuOpen(false);
     });
 
-    // --- framework menu ----------------------------------------------------
     const navToggle = document.getElementById('nav-toggle');
     const fwMenu = document.getElementById('fw-menu');
 
@@ -1096,7 +941,6 @@ const frameworks = {
 
     navToggle.addEventListener('click', () => setMenuOpen(fwMenu.hidden));
 
-    // Escape and outside clicks close it, like any dropdown.
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && !fwMenu.hidden) {
         setMenuOpen(false);
@@ -1109,7 +953,6 @@ const frameworks = {
       setMenuOpen(false);
     });
 
-    // --- theme toggle ------------------------------------------------------
     const themeToggle = document.getElementById('theme-toggle');
 
     function syncThemeToggle() {
@@ -1125,7 +968,6 @@ const frameworks = {
       setDemoTheme(next, true);
     });
 
-    // Fires for clicks, and for OS changes while no explicit choice is stored.
     document.addEventListener('demo:themechange', syncThemeToggle);
     syncThemeToggle();
 
@@ -1141,9 +983,6 @@ const frameworks = {
 
     form.addEventListener('reset', () => { result.textContent = ''; });
 
-    // On phones the pill strip scrolls sideways. Keep the active pill in view,
-    // otherwise opening #materia shows the left-most pills and you can't tell
-    // which framework is selected.
     function revealActivePill() {
       const checked = switchEl.querySelector('input:checked');
       if (!checked) return;
@@ -1155,7 +994,6 @@ const frameworks = {
 
     switchEl.addEventListener('change', revealActivePill);
 
-    // Restore the framework from #hash so a reload keeps the current framework.
     const initial = location.hash.slice(1);
     const start = frameworks[initial] ? initial : 'pico';
     buildFrameworkPills();
